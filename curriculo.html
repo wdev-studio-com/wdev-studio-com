@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wellington Ramos - Engenheiro de Software Full Stack</title>
+    <style>
+        /* ===== RESET E CONFIGURAÇÕES GERAIS ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #e6e9ef;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+            color: #1e2a3a;
+            line-height: 1.5;
+        }
+
+        .page {
+            max-width: 1000px;
+            width: 100%;
+            background-color: #ffffff;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+            border-radius: 8px;
+            padding: 50px 55px;
+        }
+
+        /* ===== TIPOGRAFIA ===== */
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #0b1a2b;
+            margin-bottom: 4px;
+        }
+
+        .subhead {
+            font-size: 18px;
+            font-weight: 400;
+            color: #2c3e5c;
+            margin-bottom: 6px;
+        }
+
+        .contact-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 28px;
+            font-size: 15px;
+            color: #2c3e5c;
+            margin: 10px 0 18px 0;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #dce2ec;
+        }
+
+        .contact-bar a {
+            color: #1a4b7a;
+            text-decoration: none;
+        }
+
+        .contact-bar a:hover {
+            text-decoration: underline;
+        }
+
+        h2 {
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            color: #0b1a2b;
+            margin: 28px 0 12px 0;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #dce2ec;
+        }
+
+        h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0b1a2b;
+            margin-top: 18px;
+            margin-bottom: 4px;
+        }
+
+        .job-title {
+            font-weight: 600;
+            color: #1a4b7a;
+        }
+
+        .company {
+            font-weight: 600;
+        }
+
+        .period {
+            font-weight: 400;
+            color: #4a5b73;
+            font-size: 14px;
+        }
+
+        p {
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        ul {
+            padding-left: 22px;
+            margin-bottom: 12px;
+        }
+
+        ul li {
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 6px 20px;
+            margin: 8px 0 4px 0;
+        }
+
+        .tech-grid .label {
+            font-weight: 600;
+            color: #0b1a2b;
+        }
+
+        .tech-grid .items {
+            color: #1e2a3a;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 30px;
+        }
+
+        /* ===== RESPONSIVO ===== */
+        @media (max-width: 700px) {
+            .page {
+                padding: 28px 22px;
+            }
+
+            .two-col {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .contact-bar {
+                gap: 8px 16px;
+                font-size: 14px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+            }
+
+            .page {
+                box-shadow: none;
+                border-radius: 0;
+                padding: 40px 48px;
+            }
+
+            .contact-bar a {
+                text-decoration: none;
+            }
+        }
+
+        /* ===== PEQUENOS AJUSTES ===== */
+        .mt-0 {
+            margin-top: 0;
+        }
+
+        .mb-0 {
+            margin-bottom: 0;
+        }
+
+        .text-muted {
+            color: #4a5b73;
+            font-size: 14px;
+        }
+
+        .divider-light {
+            border: 0;
+            height: 1px;
+            background: #dce2ec;
+            margin: 16px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- ========================================= -->
+        <!-- CABEÇALHO                                -->
+        <!-- ========================================= -->
+        <h1>Wellington Ramos</h1>
+        <div class="subhead">Engenheiro de Software Full Stack</div>
+
+        <div class="contact-bar">
+            <span>(21) 98778-3808</span>
+            <span>wrm.net@gmail.com</span>
+            <a href="https://wellington-dev.com" target="_blank">wellington-dev.com</a>
+            <span>Rio de Janeiro, RJ</span>
+        </div>
+
+        <!-- ========================================= -->
+        <!-- RESUMO PROFISSIONAL                      -->
+        <!-- ========================================= -->
+        <h2>Resumo Profissional</h2>
+        <p>
+            Engenheiro de software com 15 anos de experiência em desenvolvimento full stack,
+            com forte atuação em arquitetura de microserviços, sistemas distribuídos e
+            integrações complexas. Especialista em soluções escaláveis, processamento
+            assíncrono e automação com inteligência artificial. Atua em todas as fases do
+            ciclo de desenvolvimento, da concepção à entrega, sempre alinhado às
+            necessidades de negócio e com foco em performance, segurança e manutenibilidade.
+        </p>
+
+        <!-- ========================================= -->
+        <!-- STACK TÉCNICA                            -->
+        <!-- ========================================= -->
+        <h2>Stack Técnica</h2>
+
+        <div class="two-col">
+            <div>
+                <div class="tech-grid">
+                    <div><span class="label">Frontend:</span> <span class="items">React, Next.js, TypeScript, Tailwind
+                            CSS</span></div>
+                    <div><span class="label">Mobile:</span> <span class="items">Flutter, Dart</span></div>
+                    <div><span class="label">Backend:</span> <span class="items">Node.js, NestJS, Laravel, Python
+                            (FastAPI), .NET Core</span></div>
+                </div>
+            </div>
+            <div>
+                <div class="tech-grid">
+                    <div><span class="label">Cloud &amp; Infra:</span> <span class="items">AWS (EC2, RDS, S3, Lambda),
+                            GCP, Firebase, Docker, Kubernetes</span></div>
+                    <div><span class="label">Banco de Dados:</span> <span class="items">PostgreSQL, MySQL, MongoDB,
+                            ElasticSearch</span></div>
+                    <div><span class="label">Mensageria:</span> <span class="items">Kafka, RabbitMQ, Redis Streams,
+                            WebSocket, gRPC</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================= -->
+        <!-- EXPERIÊNCIA PROFISSIONAL                 -->
+        <!-- ========================================= -->
+        <h2>Experiência Profissional</h2>
+
+        <!-- ---- FREELANCER ---- -->
+        <h3>Desenvolvedor Full Stack Freelancer <span class="period">| 2021 – 2024</span></h3>
+        <p class="text-muted" style="margin-top:-2px;">Atendimento a startups e empresas consolidadas</p>
+
+        <ul>
+            <li>
+                Desenvolvi plataforma de gestão de clientes para fintech, com integração a
+                três gateways de pagamento (Stripe, PagSeguro, Mercado Pago) e automação
+                de cobrança recorrente, processando mais de 10 mil transações mensais.
+            </li>
+            <li>
+                Construí aplicativo mobile multiplataforma (Flutter) para startup do setor
+                esportivo, com funcionalidades em tempo real via WebSocket e gamificação,
+                alcançando mais de 50 mil downloads nos primeiros seis meses.
+            </li>
+            <li>
+                Projetei e implementei APIs escaláveis para sistema logístico, atendendo
+                picos de 5 mil requisições simultâneas, com redução de 35% no tempo médio
+                de resposta.
+            </li>
+            <li>
+                Implementei pipelines de CI/CD com testes automatizados (unitários, integração
+                e end-to-end), garantindo entregas contínuas e redução de 40% no tempo de
+                deploy.
+            </li>
+        </ul>
+
+        <!-- ---- RIOMARCA ---- -->
+        <h3>Desenvolvedor Web <span class="period">| Riomarca – 2021 (3 meses)</span></h3>
+
+        <ul>
+            <li>
+                Desenvolvi sistemas web completos utilizando Laravel e React, com APIs RESTful
+                e integrações robustas para gestão interna e atendimento ao cliente.
+            </li>
+            <li>
+                Otimizei consultas SQL e refatorei endpoints críticos, reduzindo o tempo de
+                resposta da aplicação em 40% e aumentando a capacidade de usuários simultâneos
+                de 400 para 1.200.
+            </li>
+            <li>
+                Atuei em estreita colaboração com equipes de design e produto, garantindo
+                alinhamento entre soluções técnicas e expectativas do negócio.
+            </li>
+        </ul>
+
+        <!-- ========================================= -->
+        <!-- PROJETOS DESTACADOS                      -->
+        <!-- ========================================= -->
+        <h2>Projetos Destacados</h2>
+
+        <h3>Plataforma de Gestão Financeira para Fintech</h3>
+        <p>
+            Sistema completo com dashboards analíticos em tempo real, automação de cobrança
+            e conciliação financeira. Integrado a 5 gateways de pagamento e APIs bancárias.
+            Processa aproximadamente R$ 2 milhões em transações mensais.
+        </p>
+        <p class="text-muted" style="margin-top:-4px;">
+            <strong>Tecnologias:</strong> Next.js, Node.js, NestJS, PostgreSQL, Redis, AWS (Lambda, RDS, S3).
+        </p>
+
+        <h3>Assistente Jurídico com Inteligência Generativa</h3>
+        <p>
+            Chatbot treinado para atendimento jurídico, utilizando GPT-4, RAG (Retrieval-Augmented
+            Generation) e banco de dados vetorial (Pinecone). Reduziu em 70% o tempo de
+            resposta a consultas legais, atendendo mais de 300 interações por dia.
+        </p>
+        <p class="text-muted" style="margin-top:-4px;">
+            <strong>Tecnologias:</strong> Python (FastAPI), LangChain, Pinecone, Docker, GCP.
+        </p>
+
+        <h3>Dashboard Logístico com Rastreamento em Tempo Real</h3>
+        <p>
+            Painel administrativo integrado a APIs de transportadoras, com gestão de etiquetas,
+            rastreio e expedição em massa. Suportou mais de 2 mil usuários ativos com
+            atualizações em tempo real via Server-Sent Events (SSE) e WebSocket.
+        </p>
+        <p class="text-muted" style="margin-top:-4px;">
+            <strong>Tecnologias:</strong> React, Tailwind CSS, Node.js, Express, MongoDB, ElasticSearch, RabbitMQ.
+        </p>
+
+        <!-- ========================================= -->
+        <!-- FORMAÇÃO ACADÊMICA / CERTIFICAÇÕES       -->
+        <!-- ========================================= -->
+        <h2>Formação e Certificações</h2>
+
+        <p>
+            <strong>Bacharelado em Ciência da Computação</strong><br />
+            <span class="text-muted">Universidade Estácio de Sá – Rio de Janeiro, RJ</span>
+        </p>
+
+        <p style="margin-top:6px;">
+            <strong>Certificações relevantes:</strong><br />
+            <span class="text-muted">
+                AWS Certified Solutions Architect – Associate (2022) &bull;
+                MongoDB Certified Developer (2021)
+            </span>
+        </p>
+
+        <!-- ========================================= -->
+        <!-- INFORMAÇÕES ADICIONAIS (opcional)        -->
+        <!-- ========================================= -->
+        <hr class="divider-light" />
+
+        <p style="font-size:14px; color:#4a5b73; margin:4px 0 0 0;">
+            Disponibilidade para trabalho remoto e presencial (Rio de Janeiro). Inglês técnico avançado.
+        </p>
+
+    </div>
+    <!-- /page -->
+
+</body>
+
+</html>

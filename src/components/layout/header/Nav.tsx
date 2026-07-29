@@ -1,41 +1,42 @@
-import { useState } from 'react';
-import { Menu } from '../../../components/ui/menu';
-import { Button } from '../../../components/ui/button';
-
-
+import { CONSTANTS } from "../../../config/constants";
+import { Menu } from "../../../components/ui/menu";
+import { Button } from "../../../components/ui/button";
 
 interface NavProps {
-    className: string;
-    open: boolean | "null";
-
+  className: string;
+  open: boolean | "null";
 }
 
 const Nav = ({ className, open }: NavProps) => {
+  const handleClick = () => {
+    const link = document.createElement("a");
+    link.href = "https://wellington-dev.com";
+    link.target = "_blank";
+    link.click();
+  };
 
-    const [screen, setScreen] = useState<"lg" | "sm" | "md" | undefined>("sm")
-
-    return (
-        <Menu.Root open={open}>
-
-            <Menu.Lista open={open}>
-                <Menu.Link label="Home" />
-            </Menu.Lista>
-            <Menu.Lista open={open}>
-                <Menu.Link label="Sobre" />
-            </Menu.Lista>
-            <Menu.Lista open={open}>
-                <Menu.Link label="Planos" />
-            </Menu.Lista>
-            <Menu.Lista open={open}>
-                <Menu.Link label="Dúvidas" />
-            </Menu.Lista>
-            <div className="md:hidden w-full">
-                <Button onClick={() => {
-                    // location.href = "https://app.blackconversa.com/login"
-                }} className="w-full py-[20px] border border-[#2188A2] [background-image:radial-gradient(60%_50%_at_50%_50%,_#185867_0%,_#126F85_100%)]">PORTFÓLIO</Button>
-            </div>
-        </Menu.Root>
-    );
-}
+  return (
+    <Menu.Root open={open}>
+      {CONSTANTS.nav.map((item) => (
+        <Menu.Lista key={item.label} open={open}>
+          <a
+            href={item.href}
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            {item.label}
+          </a>
+        </Menu.Lista>
+      ))}
+      <div className="md:hidden w-full">
+        <Button
+          onClick={handleClick}
+          className="w-full glass text-foreground hover:bg-accent/20"
+        >
+          Portfólio
+        </Button>
+      </div>
+    </Menu.Root>
+  );
+};
 
 export default Nav;

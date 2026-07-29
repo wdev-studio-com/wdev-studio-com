@@ -1,15 +1,14 @@
-import LazyImage from "../../../components/LazyImage";
-import { CONSTANTS } from "../../../config/constants";
-
 const Logo = () => {
-    return (
-        <div className="flex items-center justify-start gap-[2px]">
-            <LazyImage src={CONSTANTS.logo} alt={"Blackconversa"} className="w-[30px] h-[30px] bg-contain bg-end bg-no-repeat " />
-            <span className="font-bold text-[30px] text-gray-50">DEV</span>
-        </div>
-    );
-
-
-}
+  return (
+    <a href="#home" className="flex items-center gap-2 group">
+      <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-400 to-violet-500 flex items-center justify-center text-white font-bold text-sm group-hover:scale-105 transition-transform">
+        W
+      </div>
+      <span className="font-bold text-xl text-foreground">
+        Wellington<span className="text-gradient">.dev</span>
+      </span>
+    </a>
+  );
+};
 
 export default Logo;

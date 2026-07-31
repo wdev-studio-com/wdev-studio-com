@@ -10,15 +10,15 @@ const Header = () => {
   const isWide = useMediaQuery("(min-width: 768px)");
 
   return (
-    <header className="fixed z-[999] left-6 right-6 top-4 h-16 max-w-6xl mx-auto glass rounded-2xl flex items-center justify-between px-6 shadow-lg">
+    <header className="fixed z-[999] left-6 right-6 top-4 max-w-6xl mx-auto glass rounded-navbar flex items-center justify-between px-6 h-16 shadow-lg shadow-cyan-500/5">
       <Logo />
       <Nav className={""} open={isWide ? "null" : open} />
       <div className="max-md:hidden">
         <Button
           onClick={() => {
-            window.open("https://wellington-dev.com", "_blank");
+            window.open("https://wdev-studio.com", "_blank");
           }}
-          className="px-6 py-5 bg-gradient-to-r from-cyan-500 to-violet-600 hover:from-cyan-400 hover:to-violet-500 text-white font-medium rounded-xl transition-all duration-300 shadow-lg hover:shadow-cyan-500/25"
+          className="px-6 py-5 bg-cyan-600 hover:bg-cyan-500 text-white font-medium rounded-button transition-all duration-300 shadow-lg hover:shadow-cyan-500/25 hover:scale-105 active:scale-95"
         >
           Portfólio
         </Button>

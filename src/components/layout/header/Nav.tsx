@@ -10,7 +10,7 @@ interface NavProps {
 const Nav = ({ className, open }: NavProps) => {
   const handleClick = () => {
     const link = document.createElement("a");
-    link.href = "https://wellington-dev.com";
+    link.href = "https://wdev-studio.com";
     link.target = "_blank";
     link.click();
   };
@@ -21,7 +21,7 @@ const Nav = ({ className, open }: NavProps) => {
         <Menu.Lista key={item.label} open={open}>
           <a
             href={item.href}
-            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            className="text-sm text-muted-foreground hover:text-cyan-400 transition-colors relative after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-px after:bg-cyan-400 hover:after:w-full after:transition-all"
           >
             {item.label}
           </a>

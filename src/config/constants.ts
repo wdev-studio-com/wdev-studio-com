@@ -1,12 +1,12 @@
 export const CONSTANTS = {
-  logo: "./svg/icon/iconlogo.svg",
+  logo: "/logo.png",
   bkg: "./svg/bk/bkg.svg",
-  name: "Wellington Ramos",
+  name: "wdev-studio",
   role: "Engenheiro de Software Full Stack",
   email: "wrm.net@gmail.com",
   phone: "(21) 98778-3808",
   location: "Rio de Janeiro, RJ",
-  portfolio: "wellington-dev.com",
+  portfolio: "wdev-studio.com",
   experience: "15 anos",
   social: {
     github: "https://github.com/wellingtondev",

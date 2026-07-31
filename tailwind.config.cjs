@@ -53,9 +53,11 @@ module.exports = {
         },
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        navbar: "var(--radius-navbar)",
+        button: "var(--radius-button)",
+        card: "var(--radius-card)",
+        badge: "var(--radius-badge)",
+        DEFAULT: "var(--radius-default)",
       },
       keyframes: {
         "accordion-down": {

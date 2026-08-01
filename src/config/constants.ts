@@ -14,7 +14,7 @@ export const CONSTANTS = {
     whatsapp: "https://wa.me/5521987783808",
   },
   nav: [
-    { label: "Home", href: "#home" },
+    { label: "Início", href: "#home" },
     { label: "Sobre", href: "#sobre" },
     { label: "Projetos", href: "#projetos" },
     { label: "Experiência", href: "#experiencia" },

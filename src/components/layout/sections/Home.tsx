@@ -60,7 +60,7 @@ const Home = ({ id }: HomeProps) => {
         <div className="relative mb-8">
           <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-32 h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-60" />
           <h2 className="text-xl md:text-3xl font-light text-muted-foreground tracking-wide">
-            Building software that scales
+            Construindo software que escala
           </h2>
           <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-32 h-px bg-gradient-to-r from-transparent via-violet-400 to-transparent opacity-60" />
         </div>
@@ -100,7 +100,7 @@ const Home = ({ id }: HomeProps) => {
       </div>
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-        <span className="text-xs text-muted-foreground/50 uppercase tracking-widest">Scroll</span>
+        <span className="text-xs text-muted-foreground/50 uppercase tracking-widest">Role para baixo</span>
         <div className="w-5 h-8 rounded-full border border-muted-foreground/20 flex justify-center pt-2">
           <div className="w-1 h-2 rounded-full bg-cyan-400/50 animate-bounce" />
         </div>

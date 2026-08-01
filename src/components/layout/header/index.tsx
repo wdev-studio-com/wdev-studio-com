@@ -16,7 +16,7 @@ const Header = () => {
       <div className="max-md:hidden">
         <Button
           onClick={() => {
-            window.open("https://wdev-studio.com", "_blank");
+            window.open("https://www.linkedin.com/in/wellingtonrm", "_blank");
           }}
           className="px-6 py-5 bg-cyan-600 hover:bg-cyan-500 text-white font-medium rounded-button transition-all duration-300 shadow-lg hover:shadow-cyan-500/25 hover:scale-105 active:scale-95"
         >

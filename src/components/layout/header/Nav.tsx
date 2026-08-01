@@ -10,7 +10,7 @@ interface NavProps {
 const Nav = ({ className, open }: NavProps) => {
   const handleClick = () => {
     const link = document.createElement("a");
-    link.href = "https://wdev-studio.com";
+    link.href = "https://www.linkedin.com/in/wellingtonrm";
     link.target = "_blank";
     link.click();
   };

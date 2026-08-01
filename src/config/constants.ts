@@ -10,7 +10,7 @@ export const CONSTANTS = {
   experience: "15 anos",
   social: {
     github: "https://github.com/wellingtondev",
-    linkedin: "https://linkedin.com/in/wellingtondev",
+    linkedin: "https://www.linkedin.com/in/wellingtonrm",
     whatsapp: "https://wa.me/5521987783808",
   },
   nav: [

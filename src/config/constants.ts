@@ -75,7 +75,7 @@ export const CONSTANTS = {
     degree: "Bacharelado em Ciência da Computação",
     university: "Universidade Estácio de Sá – Rio de Janeiro, RJ",
     certifications: [
-      "AWS Certified Solutions Architect – Associate (2022)",
+      "AWS Certified Cloud Practitioner (2023)",
       "MongoDB Certified Developer (2021)",
     ],
   },

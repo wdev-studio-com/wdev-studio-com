@@ -79,8 +79,11 @@ Mantenedor da ecossistema **@wdev-studio**, um conjunto de pacotes de autentica�
 
 ---
 
-## 💼 Projetos em Destaque
+## 💼 Projetos em Desenvolvimento
 
+- **[Visymio](https://visymio.vercel.app/)** — Editor de vídeo online. Envie seus vídeos e comece a editar.
+- **[GuardTron](https://analytics-ashen-ten.vercel.app/)** — Proteja seu Android em um único aplicativo: VPN inteligente, firewall, bloqueador de anúncios e proteção contra rastreadores.
+- **[Ordito](https://ordito-tau.vercel.app/)** — Ordito: gestão inteligente.
 - **[CityUser](https://cityuser.com.br)** — Aplicação para monitoramento de alagamentos em pontos da cidade de Assis - SP, auxiliando a população com informações em tempo real.
 
 ---

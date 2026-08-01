@@ -11,7 +11,7 @@ interface MenuListaProps extends VariantProps<typeof menuList> {
 }
 
 const menuList = tv({
-    base: "cursor-pointer text-[#E2E5F1] font-semibold   w-[80px] h-[40px] border-b-[1px] border-transparent flex items-center justify-center",
+    base: "cursor-pointer text-[#E2E5F1] font-semibold   w-[80px] h-[40px] border-b-[1px] border-transparent flex items-center justify-center hover:border-cyan-400 transition-colors",
     variants: {
         open: {
             true: "cursor-pointer   max-md:w-full h-[40px]  flex items-center justify-center",

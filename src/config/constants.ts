@@ -21,11 +21,11 @@ export const CONSTANTS = {
     { label: "Contato", href: "#contato" },
   ],
   skills: {
-    frontend: "React, Next.js, TypeScript, Tailwind CSS",
-    mobile: "Flutter, Dart",
-    backend: "Node.js, NestJS, Laravel, Python (FastAPI), .NET Core",
+    frontend: "JavaScript, TypeScript, React, Next.js, Electron",
+    mobile: "React Native, Flutter, Kotlin, Java",
+    backend: "Node.js, NestJS, Python (FastAPI), C#, PHP, Laravel, CodeIgniter, Prisma",
     cloud: "AWS (EC2, RDS, S3, Lambda), GCP, Firebase, Docker, Kubernetes",
-    database: "PostgreSQL, MySQL, MongoDB, ElasticSearch",
+    database: "PostgreSQL, MySQL, MongoDB, ElasticSearch, Prisma",
     messaging: "Kafka, RabbitMQ, Redis Streams, WebSocket, gRPC",
   },
   projects: [

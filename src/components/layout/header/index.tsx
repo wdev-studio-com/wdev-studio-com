@@ -28,7 +28,7 @@ const Header = () => {
           onClick={() => setOpen(!open)}
           variant="ghost"
           size="icon"
-          className="text-foreground"
+          className="text-cyan-400 hover:text-foreground hover:bg-accent/20"
         >
           <FaBars size={20} />
         </Button>

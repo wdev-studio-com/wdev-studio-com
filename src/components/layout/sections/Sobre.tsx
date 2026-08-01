@@ -1,9 +1,9 @@
 import { CONSTANTS } from "../../../config/constants";
 import {
   FaCode, FaMobile, FaServer, FaCloud, FaDatabase, FaRocket,
-  FaNodeJs, FaAws, FaDocker, FaPython, FaReact
+  FaNodeJs, FaAws, FaDocker, FaPython, FaReact, FaJs, FaJava
 } from "react-icons/fa6";
-import { SiNestjs, SiKubernetes, SiRedis, SiMongodb, SiPostgresql, SiElasticsearch, SiFlutter, SiNextdotjs, SiTailwindcss, SiFastapi, SiLaravel, SiDotnet, SiGooglecloud, SiMysql } from "react-icons/si";
+import { SiNestjs, SiKubernetes, SiRedis, SiMongodb, SiPostgresql, SiElasticsearch, SiFlutter, SiNextdotjs, SiTailwindcss, SiFastapi, SiLaravel, SiDotnet, SiGooglecloud, SiMysql, SiKotlin, SiPhp, SiPrisma } from "react-icons/si";
 
 interface SobreProps {
   id: string;
@@ -11,15 +11,24 @@ interface SobreProps {
 
 const getTechIcon = (tech: string) => {
   const map: Record<string, React.ReactNode> = {
+    "JavaScript": <FaJs className="text-yellow-400" size={16} />,
     "React": <FaReact className="text-cyan-400" size={16} />,
+    "React Native": <FaReact className="text-cyan-400" size={16} />,
     "Next.js": <SiNextdotjs className="text-foreground" size={16} />,
+    "Electron": <span className="text-foreground text-xs font-bold">E</span>,
     "Node.js": <FaNodeJs className="text-green-400" size={16} />,
     "NestJS": <SiNestjs className="text-red-400" size={16} />,
     "Flutter": <SiFlutter className="text-blue-400" size={16} />,
+    "Kotlin": <SiKotlin className="text-violet-400" size={16} />,
+    "Java": <FaJava className="text-orange-400" size={16} />,
     "TypeScript": <span className="text-blue-400 text-xs font-bold">TS</span>,
     "Tailwind CSS": <SiTailwindcss className="text-cyan-400" size={16} />,
     "Python (FastAPI)": <SiFastapi className="text-teal-400" size={16} />,
+    "C#": <span className="text-purple-400 text-xs font-bold">C#</span>,
+    "PHP": <SiPhp className="text-indigo-400" size={16} />,
     "Laravel": <SiLaravel className="text-red-500" size={16} />,
+    "CodeIgniter": <span className="text-red-400 text-xs font-bold">CI</span>,
+    "Prisma": <SiPrisma className="text-emerald-400" size={16} />,
     ".NET Core": <SiDotnet className="text-purple-500" size={16} />,
     "AWS (EC2, RDS, S3, Lambda)": <FaAws className="text-orange-400" size={16} />,
     "GCP": <SiGooglecloud className="text-blue-400" size={16} />,
@@ -37,11 +46,11 @@ const getTechIcon = (tech: string) => {
 
 const Sobre = ({ id }: SobreProps) => {
   const techItems = [
-    { icon: <FaCode size={28} />, color: "bg-cyan-600", label: "Frontend", techs: ["React", "Next.js", "TypeScript", "Tailwind CSS"], desc: "Interfaces modernas e responsivas com performance em primeiro lugar." },
-    { icon: <FaMobile size={28} />, color: "bg-violet-600", label: "Mobile", techs: ["Flutter", "Dart"], desc: "Apps nativos multiplataforma com experiência fluida." },
-    { icon: <FaServer size={28} />, color: "bg-emerald-600", label: "Backend", techs: ["Node.js", "NestJS", "Python (FastAPI)", ".NET Core", "Laravel"], list: true, desc: "APIs escaláveis e sistemas distribuídos." },
-    { icon: <FaCloud size={28} />, color: "bg-orange-600", label: "Cloud", techs: ["AWS (EC2, RDS, S3, Lambda)", "GCP", "Docker", "Kubernetes"], progress: 85, desc: "Infraestrutura cloud-native." },
-    { icon: <FaDatabase size={28} />, color: "bg-teal-600", label: "Database", techs: ["PostgreSQL", "MySQL", "MongoDB", "ElasticSearch", "Redis"], list: true, desc: "Modelagem e otimização de dados." },
+    { icon: <FaCode size={28} />, color: "bg-cyan-600", label: "Frontend", techs: ["JavaScript", "TypeScript", "React", "Next.js", "Electron"], desc: "Interfaces modernas e responsivas com performance em primeiro lugar." },
+    { icon: <FaMobile size={28} />, color: "bg-violet-600", label: "Mobile", techs: ["React Native", "Flutter", "Kotlin", "Java"], desc: "Apps nativos multiplataforma com experiência fluida." },
+    { icon: <FaServer size={28} />, color: "bg-emerald-600", label: "Backend", techs: ["Node.js", "NestJS", "Python (FastAPI)", "C#", "PHP", "Laravel", "CodeIgniter", "Prisma"], list: true, desc: "APIs escaláveis e sistemas distribuídos." },
+    { icon: <FaCloud size={28} />, color: "bg-orange-600", label: "Cloud", techs: ["AWS (EC2, RDS, S3, Lambda)", "GCP", "Firebase", "Docker", "Kubernetes"], progress: 85, desc: "Infraestrutura cloud-native." },
+    { icon: <FaDatabase size={28} />, color: "bg-teal-600", label: "Database", techs: ["PostgreSQL", "MySQL", "MongoDB", "ElasticSearch", "Redis", "Prisma"], list: true, desc: "Modelagem e otimização de dados." },
     { icon: <FaRocket size={28} />, color: "bg-pink-600", label: "Messaging", techs: ["Kafka", "Redis", "RabbitMQ", "WebSocket", "gRPC"], list: true, desc: "Comunicação assíncrona e em tempo real." },
   ];
 

@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Wellington Ramos — wellington-dev.com">
+    <meta name="description" content="Relatório de Auditoria Técnica elaborado por Wellington Ramos (wellington-dev.com)">
     <title>Relatório de Auditoria Técnica — WDS-AUD-2026-0001</title>
     <style>
         /* ============================================================
@@ -201,6 +203,20 @@
         }
 
         .sheet__foot .pg {
+            color: var(--gray-600);
+        }
+
+        .sheet__disclaimer {
+            border-top: 1px solid var(--gray-200);
+            padding-top: 3mm;
+            margin-top: 3mm;
+            font-size: 9px;
+            line-height: 1.5;
+            color: var(--gray-500);
+            text-align: center;
+        }
+
+        .sheet__disclaimer strong {
             color: var(--gray-600);
         }
 
@@ -614,16 +630,18 @@
    ============================================================ */
         .kpi-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(4, minmax(0, 1fr));
             gap: 5mm;
             margin-top: 2mm;
         }
 
         .kpi-card {
+            min-width: 0;
             border: 1px solid var(--gray-200);
             border-radius: 3px;
             padding: 5mm 5mm 4.5mm;
             background: var(--gray-50);
+            overflow: hidden;
             break-inside: avoid;
             page-break-inside: avoid;
         }
@@ -632,10 +650,13 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1.5mm 4mm;
             margin-bottom: 3mm;
         }
 
         .kpi-card__name {
+            min-width: 0;
             font-size: 10.5px;
             font-weight: 700;
             text-transform: uppercase;
@@ -649,6 +670,7 @@
             font-weight: 700;
             color: var(--blue-ink);
             line-height: 1;
+            white-space: nowrap;
         }
 
         .kpi-card__score small {
@@ -1073,7 +1095,7 @@
             }
 
             .kpi-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
 
             .info-grid {
@@ -1177,8 +1199,8 @@
                 <div class="cover__top">
                     <div class="cover__mark">
                         <div class="cover__mark-badge">W</div>
-                        <div class="cover__mark-text">Consultoria Técnica<span>Auditoria de Software &amp; Produto
-                                Digital</span></div>
+                        <div class="cover__mark-text">Consultoria Técnica<span>Auditoria de Performance, Segurança &amp;
+                                Acessibilidade</span></div>
                     </div>
                     <div class="cover__id">
                         <strong>WDS-AUD-2026-0001</strong>
@@ -1188,27 +1210,26 @@
 
                 <div class="cover__title-block">
                     <p class="eyebrow">Relatório de Auditoria Técnica</p>
-                    <h1>Diagnóstico técnico completo de frontend, backend, segurança e performance.</h1>
-                    <p class="subhead">Avaliação independente da plataforma digital do cliente, com identificação de
-                        riscos, priorização de correções e recomendações de evolução técnica de curto, médio e longo
-                        prazo.</p>
+                    <h1>Diagnóstico técnico da landing page com foco em performance, acessibilidade e segurança.</h1>
+                    <p class="subhead">Avaliação independente da landing page <strong>foconengenharia.com.br</strong>,
+                        com base em dados reais do PageSpeed Insights (Lighthouse 13.4.1), identificação de riscos,
+                        priorização de correções e recomendações de evolução técnica de curto, médio e longo prazo.</p>
                 </div>
 
                 <div class="cover__meta">
                     <div class="cover__meta-cell">
                         <div class="info-grid__label" style="margin-bottom:2mm;">Cliente</div>
-                        <div class="cover__meta-value">NovaVarejo Tecnologia Ltda.<small>Rede de comércio local e
-                                delivery</small></div>
+                        <div class="cover__meta-value">Fócon Engenharia<small>foconengenharia.com.br</small></div>
                     </div>
                     <div class="cover__meta-cell">
                         <div class="info-grid__label" style="margin-bottom:2mm;">Sistema Analisado</div>
-                        <div class="cover__meta-value">app.novavarejo.com.br<small>Plataforma web e painel
-                                administrativo</small></div>
+                        <div class="cover__meta-value">https://foconengenharia.com.br/<small>Landing page oficial · desktop</small>
+                        </div>
                     </div>
                     <div class="cover__meta-cell">
                         <div class="info-grid__label" style="margin-bottom:2mm;">Data da Auditoria</div>
-                        <div class="cover__meta-value">21 a 28/07/2026<small>Análise técnica em ambiente de
-                                produção</small></div>
+                        <div class="cover__meta-value">31/07/2026<small>PageSpeed Insights · Lighthouse 13.4.1</small>
+                        </div>
                     </div>
                     <div class="cover__meta-cell">
                         <div class="info-grid__label" style="margin-bottom:2mm;">Data de Emissão</div>
@@ -1216,12 +1237,12 @@
                     </div>
                     <div class="cover__meta-cell">
                         <div class="info-grid__label" style="margin-bottom:2mm;">Responsável Técnico</div>
-                        <div class="cover__meta-value">[Nome do Auditor]<small>Consultor de Produto &amp; Engenharia
-                                Frontend</small></div>
+                        <div class="cover__meta-value">Wellington Ramos<small>Consultor de Performance &amp; Frontend</small>
+                        </div>
                     </div>
                     <div class="cover__meta-cell">
                         <div class="info-grid__label" style="margin-bottom:2mm;">Empresa Responsável</div>
-                        <div class="cover__meta-value">[Nome da Empresa]<small>Consultoria técnica independente</small>
+                        <div class="cover__meta-value">wellington-dev.com<small>Consultoria técnica independente</small>
                         </div>
                     </div>
                     <div class="cover__meta-cell">
@@ -1236,10 +1257,10 @@
                 </div>
 
                 <div class="cover__gauge-row">
-                    <div class="cover__gauge-score">68<sup>/100</sup></div>
-                    <div class="cover__gauge-text"><strong>Maturidade técnica geral: Adequada, com pendências
-                            relevantes.</strong> A plataforma está estável em produção, mas concentra riscos de
-                        segurança e performance que devem ser tratados antes da próxima fase de crescimento.</div>
+                    <div class="cover__gauge-score">97<sup>/100</sup></div>
+                    <div class="cover__gauge-text"><strong>Maturidade técnica geral: Excelente.</strong> A landing page
+                        apresenta desempenho superior à média do mercado, com oportunidades de melhoria concentradas em
+                        segurança e acessibilidade.</div>
                 </div>
 
             </div>
@@ -1269,7 +1290,7 @@
                     </div>
                     <div class="info-grid__cell">
                         <div class="info-grid__label">Responsável</div>
-                        <div class="info-grid__value">[Nome do Auditor]</div>
+                        <div class="info-grid__value">Wellington Ramos</div>
                     </div>
                 </div>
 
@@ -1285,17 +1306,17 @@
                         <tr>
                             <td class="mono">1.0.0</td>
                             <td class="mono">31/07/2026</td>
-                            <td>Primeira emissão do relatório, com escopo completo de frontend, backend, segurança,
-                                performance e SEO.</td>
+                            <td>Primeira emissão do relatório, com análise de performance, acessibilidade, segurança e
+                                SEO com base no PageSpeed Insights (Lighthouse 13.4.1).</td>
                         </tr>
                         <tr>
                             <td class="mono">0.2.0</td>
-                            <td class="mono">27/07/2026</td>
-                            <td>Consolidação dos achados técnicos e priorização do registro de problemas.</td>
+                            <td class="mono">29/07/2026</td>
+                            <td>Consolidação dos achados do Lighthouse e priorização do registro de problemas.</td>
                         </tr>
                         <tr>
                             <td class="mono">0.1.0</td>
-                            <td class="mono">21/07/2026</td>
+                            <td class="mono">31/07/2026</td>
                             <td>Abertura da auditoria e definição de escopo com o cliente.</td>
                         </tr>
                     </tbody>
@@ -1304,39 +1325,38 @@
                 <h2 class="section-title" style="margin-top:9mm;"><span class="num">02</span> Resumo Executivo</h2>
 
                 <h3 class="sub-title">Objetivo da Auditoria</h3>
-                <p>Esta auditoria tem como objetivo avaliar a maturidade técnica da plataforma
-                    <strong>app.novavarejo.com.br</strong> nas dimensões de frontend, backend, segurança, performance e
-                    SEO, identificando riscos, oportunidades de melhoria e recomendações priorizadas para orientar o
-                    roadmap técnico dos próximos trimestres.</p>
+                <p>Esta auditoria tem como objetivo avaliar a maturidade técnica da landing page
+                    <strong>foconengenharia.com.br</strong>, do cliente Fócon Engenharia, nas dimensões de performance,
+                    acessibilidade, segurança e SEO, identificando riscos, oportunidades de melhoria e recomendações
+                    priorizadas para orientar o roadmap técnico dos próximos trimestres.</p>
 
                 <h3 class="sub-title">Visão Geral da Aplicação</h3>
-                <p>A aplicação é uma plataforma de comércio local com aplicativo de consumidor, painel administrativo
-                    para lojistas e API central que integra catálogo, pedidos e logística de entrega. O sistema está em
-                    produção, com tráfego contínuo de usuários finais e integrações ativas com meios de pagamento e
-                    serviços de geolocalização.</p>
+                <p>A landing page institucional apresenta um <strong>desempenho excelente</strong>, com pontuação geral
+                    de <strong>98/100</strong> em performance e <strong>100/100</strong> em SEO e práticas
+                    recomendadas no Lighthouse para desktop. As Core Web Vitals estão aprovadas, com LCP de 0,4s e CLS
+                    de 0.089, indicando uma experiência de carregamento muito rápida e estável.</p>
 
                 <h3 class="sub-title">Principais Pontos Encontrados</h3>
                 <ul class="plain">
-                    <li>Boa organização geral de componentes de frontend, com oportunidades claras de otimização de
-                        carregamento de imagens e scripts.</li>
-                    <li>Ausência de cabeçalhos de segurança essenciais (CSP, HSTS) na aplicação web pública.</li>
-                    <li>Tempos de resposta da API acima do recomendado em endpoints de listagem de catálogo sob carga.
-                    </li>
-                    <li>Estrutura de metadados e dados estruturados incompleta, limitando o desempenho em buscas
-                        orgânicas.</li>
-                    <li>Boas práticas de versionamento e testes automatizados presentes no backend, com cobertura ainda
-                        parcial.</li>
+                    <li>Performance excelente: LCP 0,4s, FCP 0,4s e Speed Index 0,7s no desktop.</li>
+                    <li>Lacunas de segurança relevantes: CSP ineficaz, HSTS ausente, COOP ausente e ausência de
+                        proteção contra clickjacking.</li>
+                    <li>Acessibilidade (89/100) com problemas de contraste no menu e ícones sem nome acessível.</li>
+                    <li>Oportunidade de otimização em fontes (font-display) e entrega de CSS que bloqueia a
+                        renderização.</li>
+                    <li>SEO sólido (100/100), sem pendências estruturais relevantes.</li>
                 </ul>
 
                 <h3 class="sub-title">Avaliação Geral</h3>
-                <p>A plataforma apresenta uma base técnica sólida e estável para o estágio atual do produto. Os riscos
-                    identificados são majoritariamente tratáveis em curto e médio prazo, sem necessidade de
-                    reestruturação arquitetural. Recomenda-se priorizar os itens de segurança e performance descritos
-                    nas seções seguintes antes de ciclos de crescimento de tráfego.</p>
+                <p>A landing page é um exemplo de <strong>excelente otimização de performance</strong>, superando em
+                    muito os padrões de mercado. No entanto, a página apresenta <strong>lacunas significativas em
+                        segurança e acessibilidade</strong> que precisam ser tratadas com prioridade. As correções
+                    recomendadas são majoritariamente de baixo custo e alto retorno, sem necessidade de reestruturação
+                    técnica.</p>
 
             </div>
             <div class="sheet__foot">
-                <span>NovaVarejo Tecnologia Ltda. — Confidencial</span>
+                <span>Fócon Engenharia — Confidencial</span>
                 <span class="pg" data-page></span>
             </div>
         </section>
@@ -1350,88 +1370,87 @@
 
                 <h2 class="section-title"><span class="num">03</span> Indicadores Técnicos</h2>
                 <p style="margin-bottom:6mm;">Nota consolidada por dimensão avaliada, em escala de 0 a 100, com status
-                    de referência para leitura rápida.</p>
+                    de referência para leitura rápida. Métricas de Core Web Vitals exibidas com valor mensurado.</p>
 
                 <div class="kpi-grid">
 
                     <div class="kpi-card">
                         <div class="kpi-card__top">
                             <div class="kpi-card__name">Performance</div>
-                            <div class="kpi-card__score">61<small>/100</small></div>
+                            <div class="kpi-card__score">98<small>/100</small></div>
                         </div>
-                        <div class="kpi-card__status status--watch">Atenção</div>
-                        <p class="kpi-card__desc">Tempo de carregamento inicial acima do ideal em conexões móveis;
-                            oportunidade em otimização de imagens e code-splitting.</p>
-                    </div>
-
-                    <div class="kpi-card">
-                        <div class="kpi-card__top">
-                            <div class="kpi-card__name">Segurança</div>
-                            <div class="kpi-card__score">54<small>/100</small></div>
-                        </div>
-                        <div class="kpi-card__status status--risk">Risco</div>
-                        <p class="kpi-card__desc">Ausência de cabeçalhos HTTP essenciais e política de CORS mais
-                            permissiva do que o necessário.</p>
-                    </div>
-
-                    <div class="kpi-card">
-                        <div class="kpi-card__top">
-                            <div class="kpi-card__name">SEO</div>
-                            <div class="kpi-card__score">58<small>/100</small></div>
-                        </div>
-                        <div class="kpi-card__status status--watch">Atenção</div>
-                        <p class="kpi-card__desc">Metadados incompletos em páginas de produto e ausência de dados
-                            estruturados.</p>
-                    </div>
-
-                    <div class="kpi-card">
-                        <div class="kpi-card__top">
-                            <div class="kpi-card__name">Frontend</div>
-                            <div class="kpi-card__score">76<small>/100</small></div>
-                        </div>
-                        <div class="kpi-card__status status--ok">Adequado</div>
-                        <p class="kpi-card__desc">Componentização consistente e boa responsividade; pontos de melhoria
-                            em acessibilidade.</p>
-                    </div>
-
-                    <div class="kpi-card">
-                        <div class="kpi-card__top">
-                            <div class="kpi-card__name">Backend</div>
-                            <div class="kpi-card__score">72<small>/100</small></div>
-                        </div>
-                        <div class="kpi-card__status status--ok">Adequado</div>
-                        <p class="kpi-card__desc">Arquitetura de API bem definida; cache e escalabilidade demandam
-                            evolução para o próximo estágio.</p>
-                    </div>
-
-                    <div class="kpi-card">
-                        <div class="kpi-card__top">
-                            <div class="kpi-card__name">UX</div>
-                            <div class="kpi-card__score">79<small>/100</small></div>
-                        </div>
-                        <div class="kpi-card__status status--ok">Adequado</div>
-                        <p class="kpi-card__desc">Fluxos principais de compra e acompanhamento de pedido são claros e
-                            diretos.</p>
+                        <div class="kpi-card__status status--ok">Excelente</div>
+                        <p class="kpi-card__desc">LCP de 0,4s e Speed Index de 0,7s; página extremamente rápida e
+                            otimizada no desktop.</p>
                     </div>
 
                     <div class="kpi-card">
                         <div class="kpi-card__top">
                             <div class="kpi-card__name">Acessibilidade</div>
-                            <div class="kpi-card__score">49<small>/100</small></div>
+                            <div class="kpi-card__score">89<small>/100</small></div>
                         </div>
-                        <div class="kpi-card__status status--risk">Risco</div>
-                        <p class="kpi-card__desc">Contraste insuficiente em elementos secundários e navegação por
-                            teclado incompleta.</p>
+                        <div class="kpi-card__status status--watch">Atenção</div>
+                        <p class="kpi-card__desc">Contraste insuficiente no menu de navegação e ícones sem nome
+                            acessível para leitores de tela.</p>
                     </div>
 
                     <div class="kpi-card">
                         <div class="kpi-card__top">
-                            <div class="kpi-card__name">Arquitetura</div>
-                            <div class="kpi-card__score">74<small>/100</small></div>
+                            <div class="kpi-card__name">SEO</div>
+                            <div class="kpi-card__score">100<small>/100</small></div>
                         </div>
-                        <div class="kpi-card__status status--ok">Adequado</div>
-                        <p class="kpi-card__desc">Separação clara de responsabilidades entre serviços, com débito
-                            técnico controlado.</p>
+                        <div class="kpi-card__status status--ok">Excelente</div>
+                        <p class="kpi-card__desc">Estrutura, metadados e indexação adequados, sem pendências
+                            estruturais relevantes.</p>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-card__top">
+                            <div class="kpi-card__name">Práticas</div>
+                            <div class="kpi-card__score">100<small>/100</small></div>
+                        </div>
+                        <div class="kpi-card__status status--ok">Excelente</div>
+                        <p class="kpi-card__desc">Auditoria sem reprovações; falhas de segurança identificadas em
+                            diagnóstico isolado.</p>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-card__top">
+                            <div class="kpi-card__name">LCP</div>
+                            <div class="kpi-card__score">0,4<small>s</small></div>
+                        </div>
+                        <div class="kpi-card__status status--ok">Aprovado</div>
+                        <p class="kpi-card__desc">Largest Contentful Paint excelente; a imagem principal carrega quase
+                            instantaneamente.</p>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-card__top">
+                            <div class="kpi-card__name">CLS</div>
+                            <div class="kpi-card__score">0.089</div>
+                        </div>
+                        <div class="kpi-card__status status--ok">Aprovado</div>
+                        <p class="kpi-card__desc">Layout estável, com pequenas mudanças de posicionamento durante o
+                            carregamento.</p>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-card__top">
+                            <div class="kpi-card__name">FCP</div>
+                            <div class="kpi-card__score">0,4<small>s</small></div>
+                        </div>
+                        <div class="kpi-card__status status--ok">Aprovado</div>
+                        <p class="kpi-card__desc">Primeiro conteúdo renderizado quase que instantaneamente no
+                            desktop.</p>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-card__top">
+                            <div class="kpi-card__name">Speed Index</div>
+                            <div class="kpi-card__score">0,7<small>s</small></div>
+                        </div>
+                        <div class="kpi-card__status status--ok">Aprovado</div>
+                        <p class="kpi-card__desc">Página totalmente visível em menos de 1 segundo de carregamento.</p>
                     </div>
 
                 </div>
@@ -1440,9 +1459,9 @@
                 <div style="display:flex; flex-direction:column; gap:4mm; margin-top:4mm;">
                     <div class="gauge">
                         <div class="gauge__top"><span class="gauge__label">Média Geral da Plataforma</span><span
-                                class="gauge__score">65 / 100</span></div>
+                                class="gauge__score">97 / 100</span></div>
                         <div class="gauge__track">
-                            <div class="gauge__fill" style="width:65%;"></div>
+                            <div class="gauge__fill" style="width:97%;"></div>
                         </div>
                         <div class="gauge__ticks"><span style="left:0%"></span><span style="left:25%"></span><span
                                 style="left:50%"></span><span style="left:75%"></span><span style="left:100%"></span>
@@ -1454,7 +1473,7 @@
 
             </div>
             <div class="sheet__foot">
-                <span>NovaVarejo Tecnologia Ltda. — Confidencial</span>
+                <span>Fócon Engenharia — Confidencial</span>
                 <span class="pg" data-page></span>
             </div>
         </section>
@@ -1466,122 +1485,107 @@
             <div class="sheet__head"><strong>WDS-AUD-2026-0001</strong> · Relatório de Auditoria Técnica</div>
             <div class="sheet__body">
 
-                <h2 class="section-title"><span class="num">04</span> Análise Técnica — Frontend</h2>
+                <h2 class="section-title"><span class="num">04</span> Análise Técnica — Frontend &amp; Performance</h2>
 
                 <div class="analysis-block">
                     <div class="criteria-row">
-                        <div class="criteria-row__label">Arquitetura</div>
-                        <div class="criteria-row__desc">Estrutura de componentes organizada por domínio, com separação
-                            razoável entre camadas de apresentação e lógica de negócio.</div>
+                        <div class="criteria-row__label">Stack &amp; Estrutura</div>
+                        <div class="criteria-row__desc">Landing page em WordPress com WP Rocket e ElementsKit; tema
+                            enxuto, com estrutura de entrega de ativos bem organizada.</div>
                         <div class="criteria-row__tag" style="background:var(--green-tint); color:var(--green);">
                             Adequado</div>
                     </div>
                     <div class="criteria-row">
-                        <div class="criteria-row__label">Componentes</div>
-                        <div class="criteria-row__desc">Reuso consistente de componentes de interface, ainda que sem um
-                            design system formalmente documentado.</div>
+                        <div class="criteria-row__label">Fontes</div>
+                        <div class="criteria-row__desc">Arquivo Montserrat-Light.ttf (77 KiB) no caminho crítico de
+                            renderização, sem <code>font-display: swap</code> — usuário pode ver texto invisível por
+                            até 340 ms.</div>
                         <div class="criteria-row__tag" style="background:var(--yellow-tint); color:var(--yellow);">
                             Atenção</div>
                     </div>
                     <div class="criteria-row">
-                        <div class="criteria-row__label">Responsividade</div>
-                        <div class="criteria-row__desc">Boa adaptação entre desktop e mobile nos fluxos principais;
-                            pontos de quebra em telas intermediárias no painel do lojista.</div>
-                        <div class="criteria-row__tag" style="background:var(--green-tint); color:var(--green);">
-                            Adequado</div>
+                        <div class="criteria-row__label">CSS de Renderização</div>
+                        <div class="criteria-row__desc">Múltiplos arquivos CSS (front.used.css, post-20926.css) estão
+                            bloqueando a renderização inicial, adicionando cerca de 100 ms ao carregamento.</div>
+                        <div class="criteria-row__tag" style="background:var(--yellow-tint); color:var(--yellow);">
+                            Atenção</div>
                     </div>
                     <div class="criteria-row">
-                        <div class="criteria-row__label">Experiência do Usuário</div>
-                        <div class="criteria-row__desc">Fluxo de checkout objetivo, com poucas etapas; feedback de erro
-                            pode ser mais claro em falhas de pagamento.</div>
-                        <div class="criteria-row__tag" style="background:var(--green-tint); color:var(--green);">
-                            Adequado</div>
-                    </div>
-                    <div class="criteria-row">
-                        <div class="criteria-row__label">Performance de Carregamento</div>
-                        <div class="criteria-row__desc">Tempo de interação inicial acima do recomendado em 3G/4G,
-                            associado a bundles não divididos por rota.</div>
-                        <div class="criteria-row__tag" style="background:#FCE4DE; color:#A6432B;">Alta prioridade</div>
+                        <div class="criteria-row__label">CSS não Utilizado</div>
+                        <div class="criteria-row__desc">O arquivo front.used.css (20,4 KiB) contém CSS não utilizado;
+                            ativar a remoção de CSS não usado no WP Rocket.</div>
+                        <div class="criteria-row__tag" style="background:var(--yellow-tint); color:var(--yellow);">
+                            Atenção</div>
                     </div>
                     <div class="criteria-row">
                         <div class="criteria-row__label">Imagens</div>
-                        <div class="criteria-row__desc">Ausência de formatos modernos (WebP/AVIF) e de carregamento
-                            progressivo em listagens de produto.</div>
+                        <div class="criteria-row__desc">Elementos de imagem (logo, avatar) sem dimensões explícitas
+                            podem causar pequenas mudanças de layout; adicionar <code>width</code> e
+                            <code>height</code>.</div>
                         <div class="criteria-row__tag" style="background:var(--yellow-tint); color:var(--yellow);">
                             Atenção</div>
                     </div>
-                    <div class="criteria-row">
-                        <div class="criteria-row__label">Acessibilidade</div>
-                        <div class="criteria-row__desc">Falta de rótulos ARIA em componentes interativos e contraste
-                            insuficiente em textos secundários.</div>
-                        <div class="criteria-row__tag" style="background:var(--red-tint); color:var(--red);">Risco</div>
-                    </div>
                     <div class="criteria-row" style="border-bottom:none;">
-                        <div class="criteria-row__label">Otimização</div>
-                        <div class="criteria-row__desc">Ausência de lazy loading em rotas secundárias e de compressão
-                            adequada de ativos estáticos.</div>
+                        <div class="criteria-row__label">Animações</div>
+                        <div class="criteria-row__desc">Botão "CONHEÇA NOSSOS SERVIÇOS" anima a propriedade
+                            <code>visibility</code>, gerando repaints; preferir <code>transform</code> e
+                            <code>opacity</code> (processados pela GPU).</div>
                         <div class="criteria-row__tag" style="background:var(--yellow-tint); color:var(--yellow);">
                             Atenção</div>
                     </div>
                 </div>
 
-                <h2 class="section-title" style="margin-top:6mm;"><span class="num">05</span> Análise Técnica — Backend
-                </h2>
+                <h2 class="section-title" style="margin-top:6mm;"><span class="num">05</span> Análise Técnica — Core
+                    Web Vitals</h2>
 
                 <div class="analysis-block">
                     <div class="criteria-row">
-                        <div class="criteria-row__label">Arquitetura da API</div>
-                        <div class="criteria-row__desc">API REST bem estruturada, com contratos consistentes entre os
-                            principais recursos do sistema.</div>
+                        <div class="criteria-row__label">LCP</div>
+                        <div class="criteria-row__desc">Largest Contentful Paint de 0,4s — aprovado. A imagem principal
+                            carrega muito rapidamente, superando a meta recomendada de 2,5s.</div>
                         <div class="criteria-row__tag" style="background:var(--green-tint); color:var(--green);">
-                            Adequado</div>
+                            Aprovado</div>
                     </div>
                     <div class="criteria-row">
-                        <div class="criteria-row__label">Segurança</div>
-                        <div class="criteria-row__desc">Autenticação e autorização implementadas corretamente; ausência
-                            de rate limiting em endpoints públicos.</div>
-                        <div class="criteria-row__tag" style="background:var(--yellow-tint); color:var(--yellow);">
-                            Atenção</div>
-                    </div>
-                    <div class="criteria-row">
-                        <div class="criteria-row__label">Cache</div>
-                        <div class="criteria-row__desc">Estratégia de cache ausente em endpoints de catálogo de alta
-                            frequência de leitura.</div>
-                        <div class="criteria-row__tag" style="background:#FCE4DE; color:#A6432B;">Alta prioridade</div>
-                    </div>
-                    <div class="criteria-row">
-                        <div class="criteria-row__label">Tratamento de Erros</div>
-                        <div class="criteria-row__desc">Respostas de erro padronizadas, com bom nível de detalhe para
-                            depuração sem expor dados sensíveis.</div>
+                        <div class="criteria-row__label">FCP</div>
+                        <div class="criteria-row__desc">First Contentful Paint de 0,4s — aprovado. O conteúdo é
+                            renderizado quase que instantaneamente no desktop.</div>
                         <div class="criteria-row__tag" style="background:var(--green-tint); color:var(--green);">
-                            Adequado</div>
+                            Aprovado</div>
                     </div>
                     <div class="criteria-row">
-                        <div class="criteria-row__label">Escalabilidade</div>
-                        <div class="criteria-row__desc">Serviços preparados para escala horizontal, ainda sem testes de
-                            carga formais documentados.</div>
-                        <div class="criteria-row__tag" style="background:var(--yellow-tint); color:var(--yellow);">
-                            Atenção</div>
+                        <div class="criteria-row__label">Speed Index</div>
+                        <div class="criteria-row__desc">0,7s — aprovado. A página fica totalmente visível em menos de 1
+                            segundo de carregamento.</div>
+                        <div class="criteria-row__tag" style="background:var(--green-tint); color:var(--green);">
+                            Aprovado</div>
                     </div>
                     <div class="criteria-row">
-                        <div class="criteria-row__label">Banco de Dados</div>
-                        <div class="criteria-row__desc">Modelagem consistente, com oportunidade de indexação adicional
-                            em consultas de pedidos por período.</div>
-                        <div class="criteria-row__tag" style="background:var(--yellow-tint); color:var(--yellow);">
-                            Atenção</div>
+                        <div class="criteria-row__label">CLS</div>
+                        <div class="criteria-row__desc">Cumulative Layout Shift de 0.089 — aprovado. O layout é estável,
+                            com pequenas mudanças de posicionamento.</div>
+                        <div class="criteria-row__tag" style="background:var(--green-tint); color:var(--green);">
+                            Aprovado</div>
+                    </div>
+                    <div class="criteria-row">
+                        <div class="criteria-row__label">INP</div>
+                        <div class="criteria-row__desc">Interaction to Next Paint não disponível para desktop na versão
+                            do Lighthouse utilizada (13.4.1).</div>
+                        <div class="criteria-row__tag" style="background:var(--gray-100); color:var(--gray-600);">
+                            N/D</div>
                     </div>
                     <div class="criteria-row" style="border-bottom:none;">
-                        <div class="criteria-row__label">Integrações</div>
-                        <div class="criteria-row__desc">Integrações de pagamento e geolocalização estáveis, com
-                            monitoramento de falhas adequado.</div>
+                        <div class="criteria-row__label">Veredito</div>
+                        <div class="criteria-row__desc">Core Web Vitals aprovadas no desktop, com LCP e FCP em 0,4s —
+                            desempenho muito superior aos padrões de mercado.</div>
                         <div class="criteria-row__tag" style="background:var(--green-tint); color:var(--green);">
-                            Adequado</div>
+                            Aprovado</div>
                     </div>
                 </div>
 
             </div>
             <div class="sheet__foot">
-                <span>NovaVarejo Tecnologia Ltda. — Confidencial</span>
+                <span>Fócon Engenharia — Confidencial</span>
                 <span class="pg" data-page></span>
             </div>
         </section>
@@ -1597,88 +1601,72 @@
                 <div class="analysis-block">
                     <div class="criteria-row">
                         <div class="criteria-row__label">HTTPS</div>
-                        <div class="criteria-row__desc">Certificado válido e redirecionamento forçado em todas as rotas
-                            públicas.</div>
+                        <div class="criteria-row__desc">Conexão segura ativa e certificado válido; a auditoria aponta a
+                            necessidade de reforçar os cabeçalhos de segurança.</div>
                         <div class="criteria-row__tag" style="background:var(--green-tint); color:var(--green);">
                             Adequado</div>
-                    </div>
-                    <div class="criteria-row">
-                        <div class="criteria-row__label">Headers HTTP</div>
-                        <div class="criteria-row__desc">Ausência de Content-Security-Policy e Strict-Transport-Security
-                            na aplicação web.</div>
-                        <div class="criteria-row__tag" style="background:var(--red-tint); color:var(--red);">Risco</div>
-                    </div>
-                    <div class="criteria-row">
-                        <div class="criteria-row__label">Cookies</div>
-                        <div class="criteria-row__desc">Cookies de sessão sem atributo SameSite definido explicitamente.
-                        </div>
-                        <div class="criteria-row__tag" style="background:var(--yellow-tint); color:var(--yellow);">
-                            Atenção</div>
-                    </div>
-                    <div class="criteria-row">
-                        <div class="criteria-row__label">CORS</div>
-                        <div class="criteria-row__desc">Política atual permite origens além do necessário para o
-                            funcionamento da aplicação.</div>
-                        <div class="criteria-row__tag" style="background:#FCE4DE; color:#A6432B;">Alta prioridade</div>
                     </div>
                     <div class="criteria-row">
                         <div class="criteria-row__label">CSP</div>
-                        <div class="criteria-row__desc">Não implementada; recomenda-se política restritiva para scripts
-                            e origens de conteúdo.</div>
+                        <div class="criteria-row__desc">Content-Security-Policy ineficaz: a diretiva
+                            <code>script-src</code> está ausente, permitindo a execução de scripts não seguros e
+                            aumentando o risco de ataques XSS.</div>
                         <div class="criteria-row__tag" style="background:var(--red-tint); color:var(--red);">Risco</div>
                     </div>
                     <div class="criteria-row">
-                        <div class="criteria-row__label">Exposição de Informações</div>
-                        <div class="criteria-row__desc">Cabeçalho de servidor expõe versão de tecnologia utilizada,
-                            facilitando reconhecimento por terceiros.</div>
-                        <div class="criteria-row__tag" style="background:var(--yellow-tint); color:var(--yellow);">
-                            Atenção</div>
+                        <div class="criteria-row__label">HSTS</div>
+                        <div class="criteria-row__desc">Cabeçalho Strict-Transport-Security ausente, não forçando
+                            conexões HTTPS nem prevenindo ataques de downgrade.</div>
+                        <div class="criteria-row__tag" style="background:var(--red-tint); color:var(--red);">Risco</div>
+                    </div>
+                    <div class="criteria-row">
+                        <div class="criteria-row__label">COOP</div>
+                        <div class="criteria-row__desc">Cross-Origin-Opener-Policy ausente, deixando a janela exposta a
+                            ataques de espectro e side-channel.</div>
+                        <div class="criteria-row__tag" style="background:var(--red-tint); color:var(--red);">Risco</div>
+                    </div>
+                    <div class="criteria-row">
+                        <div class="criteria-row__label">Clickjacking</div>
+                        <div class="criteria-row__desc">Ausência de política de controle de frames
+                            (<code>X-Frame-Options</code> ou <code>frame-ancestors</code> no CSP).</div>
+                        <div class="criteria-row__tag" style="background:var(--red-tint); color:var(--red);">Risco</div>
                     </div>
                     <div class="criteria-row" style="border-bottom:none;">
-                        <div class="criteria-row__label">Boas Práticas</div>
-                        <div class="criteria-row__desc">Gestão de segredos e variáveis de ambiente segue boas práticas
-                            de mercado.</div>
-                        <div class="criteria-row__tag" style="background:var(--green-tint); color:var(--green);">
-                            Adequado</div>
+                        <div class="criteria-row__label">Trusted Types</div>
+                        <div class="criteria-row__desc">Diretiva <code>require-trusted-types-for</code> não configurada;
+                            sua implementação mitiga ataques XSS baseados em DOM.</div>
+                        <div class="criteria-row__tag" style="background:var(--red-tint); color:var(--red);">Risco</div>
                     </div>
                 </div>
 
                 <h2 class="section-title" style="margin-top:6mm;"><span class="num">07</span> Análise Técnica —
-                    Performance</h2>
+                    Acessibilidade</h2>
                 <div class="analysis-block">
                     <div class="criteria-row">
-                        <div class="criteria-row__label">Carregamento</div>
-                        <div class="criteria-row__desc">Tempo até interatividade acima de 4s em conexões móveis
-                            simuladas.</div>
-                        <div class="criteria-row__tag" style="background:#FCE4DE; color:#A6432B;">Alta prioridade</div>
+                        <div class="criteria-row__label">Contraste de Cores</div>
+                        <div class="criteria-row__desc">O texto "Home" e outros links do menu de navegação têm contraste
+                            insuficiente com o fundo; ajustar para atender ao nível AA do WCAG (4.5:1).</div>
+                        <div class="criteria-row__tag" style="background:var(--red-tint); color:var(--red);">Risco</div>
                     </div>
                     <div class="criteria-row">
-                        <div class="criteria-row__label">Core Web Vitals</div>
-                        <div class="criteria-row__desc">LCP e CLS dentro do aceitável; INP acima do recomendado nas
-                            páginas de listagem.</div>
-                        <div class="criteria-row__tag" style="background:var(--yellow-tint); color:var(--yellow);">
-                            Atenção</div>
+                        <div class="criteria-row__label">Nomes e Etiquetas</div>
+                        <div class="criteria-row__desc">Links de "Voltar ao topo" (ícone de seta) não possuem nome
+                            acessível; adicionar <code>aria-label</code> para leitores de tela.</div>
+                        <div class="criteria-row__tag" style="background:var(--red-tint); color:var(--red);">Risco</div>
                     </div>
                     <div class="criteria-row">
-                        <div class="criteria-row__label">Tamanho dos Arquivos</div>
-                        <div class="criteria-row__desc">Bundle principal acima de 450kb comprimido, sem divisão por
-                            rota.</div>
-                        <div class="criteria-row__tag" style="background:var(--yellow-tint); color:var(--yellow);">
-                            Atenção</div>
-                    </div>
-                    <div class="criteria-row">
-                        <div class="criteria-row__label">Requisições</div>
-                        <div class="criteria-row__desc">Número elevado de chamadas simultâneas na tela inicial, sem
-                            agrupamento.</div>
+                        <div class="criteria-row__label">Links de Salto</div>
+                        <div class="criteria-row__desc">O link de "pular para o conteúdo" não é focalizável; ajustar o
+                            CSS para exibi-lo ao receber foco via teclado.</div>
                         <div class="criteria-row__tag" style="background:var(--yellow-tint); color:var(--yellow);">
                             Atenção</div>
                     </div>
                     <div class="criteria-row" style="border-bottom:none;">
-                        <div class="criteria-row__label">Otimizações Possíveis</div>
-                        <div class="criteria-row__desc">Code-splitting, cache de API e compressão de imagens como ações
-                            de maior retorno.</div>
-                        <div class="criteria-row__tag" style="background:var(--blue-tint); color:var(--blue);">
-                            Recomendado</div>
+                        <div class="criteria-row__label">Landmark Principal</div>
+                        <div class="criteria-row__desc">O documento não possui elemento <code>&lt;main&gt;</code> ou
+                            <code>role="main"</code>, ponto de referência essencial para leitores de tela.</div>
+                        <div class="criteria-row__tag" style="background:var(--yellow-tint); color:var(--yellow);">
+                            Atenção</div>
                     </div>
                 </div>
 
@@ -1686,50 +1674,37 @@
                 <div class="analysis-block">
                     <div class="criteria-row">
                         <div class="criteria-row__label">Metadata</div>
-                        <div class="criteria-row__desc">Títulos e descrições ausentes ou duplicados em parte das páginas
-                            de produto.</div>
-                        <div class="criteria-row__tag" style="background:var(--yellow-tint); color:var(--yellow);">
-                            Atenção</div>
+                        <div class="criteria-row__desc">Títulos e descrições presentes e sem duplicações relevantes,
+                            contribuindo para a pontuação 100/100.</div>
+                        <div class="criteria-row__tag" style="background:var(--green-tint); color:var(--green);">
+                            Adequado</div>
                     </div>
                     <div class="criteria-row">
                         <div class="criteria-row__label">Indexação</div>
-                        <div class="criteria-row__desc">Páginas principais indexadas corretamente pelos mecanismos de
-                            busca.</div>
+                        <div class="criteria-row__desc">Conteúdo indexado corretamente pelos mecanismos de busca, sem
+                            bloqueios indevidos de rotas relevantes.</div>
                         <div class="criteria-row__tag" style="background:var(--green-tint); color:var(--green);">
                             Adequado</div>
                     </div>
                     <div class="criteria-row">
-                        <div class="criteria-row__label">Sitemap</div>
-                        <div class="criteria-row__desc">Sitemap presente, sem atualização automática ao publicar novos
-                            produtos.</div>
-                        <div class="criteria-row__tag" style="background:var(--yellow-tint); color:var(--yellow);">
-                            Atenção</div>
-                    </div>
-                    <div class="criteria-row">
-                        <div class="criteria-row__label">Robots</div>
-                        <div class="criteria-row__desc">Arquivo configurado corretamente, sem bloqueios indevidos de
-                            rotas relevantes.</div>
+                        <div class="criteria-row__label">Estrutura</div>
+                        <div class="criteria-row__desc">HTML semântico com hierarquia de títulos apropriada,
+                            favorecendo a leitura dos buscadores.</div>
                         <div class="criteria-row__tag" style="background:var(--green-tint); color:var(--green);">
                             Adequado</div>
-                    </div>
-                    <div class="criteria-row">
-                        <div class="criteria-row__label">Estrutura HTML</div>
-                        <div class="criteria-row__desc">Hierarquia de títulos inconsistente em algumas páginas de
-                            categoria.</div>
-                        <div class="criteria-row__tag" style="background:var(--yellow-tint); color:var(--yellow);">
-                            Atenção</div>
                     </div>
                     <div class="criteria-row" style="border-bottom:none;">
-                        <div class="criteria-row__label">Dados Estruturados</div>
-                        <div class="criteria-row__desc">Ausência de marcação schema.org em páginas de produto e
-                            avaliação.</div>
-                        <div class="criteria-row__tag" style="background:#FCE4DE; color:#A6432B;">Alta prioridade</div>
+                        <div class="criteria-row__label">Veredito</div>
+                        <div class="criteria-row__desc">SEO técnico 100/100, sem pendências estruturais relevantes no
+                            escopo desta auditoria.</div>
+                        <div class="criteria-row__tag" style="background:var(--green-tint); color:var(--green);">
+                            Excelente</div>
                     </div>
                 </div>
 
             </div>
             <div class="sheet__foot">
-                <span>NovaVarejo Tecnologia Ltda. — Confidencial</span>
+                <span>Fócon Engenharia — Confidencial</span>
                 <span class="pg" data-page></span>
             </div>
         </section>
@@ -1745,60 +1720,60 @@
 
                 <div class="problem">
                     <div class="problem__head">
-                        <div><span class="problem__id">PB-01</span><span class="problem__title">Ausência de
-                                Content-Security-Policy</span></div>
+                        <div><span class="problem__id">PB-01</span><span class="problem__title">Content-Security-Policy
+                                ineficaz</span></div>
                         <span class="crit crit--critica">Crítica</span>
                     </div>
                     <div class="problem__body">
                         <div class="problem__field">
                             <h4>Descrição Técnica</h4>
-                            <p>A aplicação web não define um cabeçalho Content-Security-Policy, permitindo execução de
-                                scripts de qualquer origem.</p>
+                            <p>A diretiva <code>script-src</code> está ausente do CSP, permitindo a execução de scripts
+                                de qualquer origem.</p>
                         </div>
                         <div class="problem__field">
                             <h4>Impacto</h4>
-                            <p>Aumenta a superfície de ataque para injeção de scripts (XSS) e carregamento de conteúdo
-                                malicioso de terceiros.</p>
+                            <p>Aumenta significativamente a superfície de ataque para injeção de scripts (XSS).</p>
                         </div>
                         <div class="problem__field">
                             <h4>Recomendação</h4>
-                            <p>Implementar CSP restritiva, liberando apenas origens efetivamente utilizadas por scripts,
-                                estilos e imagens.</p>
+                            <p>Configurar CSP rigorosa, liberando apenas as origens efetivamente utilizadas por
+                                scripts, estilos e imagens.</p>
                         </div>
                         <div class="problem__field">
                             <h4>Benefício Esperado</h4>
-                            <p>Redução significativa de risco de ataques baseados em injeção de conteúdo no navegador.
-                            </p>
+                            <p>Redução drástica dos vetores de ataque baseados em conteúdo não autorizado.</p>
                         </div>
                         <div class="problem__field full">
                             <h4>Prioridade</h4>
-                            <p>Curto prazo — recomenda-se tratamento antes do próximo ciclo de release.</p>
+                            <p>Curto prazo — ação mais crítica desta auditoria; tratar antes do próximo ciclo de
+                                release.</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="problem">
                     <div class="problem__head">
-                        <div><span class="problem__id">PB-02</span><span class="problem__title">Política de CORS
-                                excessivamente permissiva</span></div>
+                        <div><span class="problem__id">PB-02</span><span class="problem__title">HSTS e COOP
+                                ausentes</span></div>
                         <span class="crit crit--alta">Alta</span>
                     </div>
                     <div class="problem__body">
                         <div class="problem__field">
                             <h4>Descrição Técnica</h4>
-                            <p>A API aceita requisições de origens não relacionadas ao domínio oficial da aplicação.</p>
+                            <p>Nenhum cabeçalho Strict-Transport-Security (HSTS) nem Cross-Origin-Opener-Policy (COOP)
+                                encontrado.</p>
                         </div>
                         <div class="problem__field">
                             <h4>Impacto</h4>
-                            <p>Facilita o consumo indevido da API por aplicações de terceiros não autorizadas.</p>
+                            <p>Exposição a ataques de downgrade de conexão e a ataques de espectro e side-channel.</p>
                         </div>
                         <div class="problem__field">
                             <h4>Recomendação</h4>
-                            <p>Restringir a lista de origens permitidas às aplicações oficiais do produto.</p>
+                            <p>Implementar HSTS para forçar HTTPS e COOP para isolar a janela de navegação.</p>
                         </div>
                         <div class="problem__field">
                             <h4>Benefício Esperado</h4>
-                            <p>Maior controle sobre o consumo da API e redução de uso indevido de dados.</p>
+                            <p>Conexões sempre seguras e isolamento efetivo entre contextos de navegação.</p>
                         </div>
                         <div class="problem__field full">
                             <h4>Prioridade</h4>
@@ -1809,104 +1784,135 @@
 
                 <div class="problem">
                     <div class="problem__head">
-                        <div><span class="problem__id">PB-03</span><span class="problem__title">Ausência de cache em
-                                endpoints de catálogo</span></div>
+                        <div><span class="problem__id">PB-03</span><span class="problem__title">Mitigação de
+                                clickjacking ausente</span></div>
                         <span class="crit crit--alta">Alta</span>
                     </div>
                     <div class="problem__body">
                         <div class="problem__field">
                             <h4>Descrição Técnica</h4>
-                            <p>Endpoints de listagem de produtos consultam o banco de dados a cada requisição, sem
-                                camada intermediária de cache.</p>
+                            <p>Nenhuma política de controle de frames (<code>X-Frame-Options</code> ou
+                                <code>frame-ancestors</code> no CSP) configurada.</p>
                         </div>
                         <div class="problem__field">
                             <h4>Impacto</h4>
-                            <p>Aumento de tempo de resposta e de carga no banco de dados sob picos de acesso.</p>
+                            <p>Permite que a página seja incorporada em sites de terceiros para ataques de
+                                clickjacking.</p>
                         </div>
                         <div class="problem__field">
                             <h4>Recomendação</h4>
-                            <p>Introduzir cache de curta duração para consultas de catálogo com baixa frequência de
-                                alteração.</p>
+                            <p>Definir <code>X-Frame-Options: SAMEORIGIN</code> ou a diretiva
+                                <code>frame-ancestors</code> no CSP.</p>
                         </div>
                         <div class="problem__field">
                             <h4>Benefício Esperado</h4>
-                            <p>Redução do tempo médio de resposta e maior resiliência em horários de pico.</p>
+                            <p>Impede sobreposição maliciosa da página em contêineres de terceiros.</p>
                         </div>
                         <div class="problem__field full">
                             <h4>Prioridade</h4>
-                            <p>Médio prazo.</p>
+                            <p>Curto prazo.</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="problem">
                     <div class="problem__head">
-                        <div><span class="problem__id">PB-04</span><span class="problem__title">Contraste insuficiente e
-                                navegação por teclado incompleta</span></div>
+                        <div><span class="problem__id">PB-04</span><span class="problem__title">Contraste insuficiente
+                                e ícones sem nome acessível</span></div>
+                        <span class="crit crit--alta">Alta</span>
+                    </div>
+                    <div class="problem__body">
+                        <div class="problem__field">
+                            <h4>Descrição Técnica</h4>
+                            <p>"Home" e links do menu não atendem ao contraste mínimo do WCAG AA; links "Voltar ao
+                                topo" não possuem nome acessível.</p>
+                        </div>
+                        <div class="problem__field">
+                            <h4>Impacto</h4>
+                            <p>Dificulta a leitura para usuários com baixa visão e o uso por leitores de tela.</p>
+                        </div>
+                        <div class="problem__field">
+                            <h4>Recomendação</h4>
+                            <p>Ajustar a paleta do menu e adicionar <code>aria-label</code> aos ícones de navegação.
+                            </p>
+                        </div>
+                        <div class="problem__field">
+                            <h4>Benefício Esperado</h4>
+                            <p>Ampliação do público atendido e conformidade com as diretrizes WCAG.</p>
+                        </div>
+                        <div class="problem__field full">
+                            <h4>Prioridade</h4>
+                            <p>Curto prazo.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="problem">
+                    <div class="problem__head">
+                        <div><span class="problem__id">PB-05</span><span class="problem__title">Fonte Montserrat sem
+                                font-display: swap</span></div>
                         <span class="crit crit--media">Média</span>
                     </div>
                     <div class="problem__body">
                         <div class="problem__field">
                             <h4>Descrição Técnica</h4>
-                            <p>Elementos secundários de interface não atendem à taxa de contraste mínima recomendada;
-                                parte dos controles não é acessível via teclado.</p>
+                            <p>O arquivo Montserrat-Light.ttf (77 KiB) está no caminho crítico de renderização sem
+                                <code>font-display</code> definido.</p>
                         </div>
                         <div class="problem__field">
                             <h4>Impacto</h4>
-                            <p>Reduz a usabilidade para usuários com baixa visão ou que dependem de navegação por
-                                teclado.</p>
+                            <p>Usuários podem ver texto invisível por até 340 ms durante o carregamento.</p>
                         </div>
                         <div class="problem__field">
                             <h4>Recomendação</h4>
-                            <p>Revisar paleta de contraste e implementar ordem de foco consistente nos componentes
-                                interativos.</p>
+                            <p>Definir <code>font-display: swap</code> ou <code>optional</code> para a fonte.</p>
                         </div>
                         <div class="problem__field">
                             <h4>Benefício Esperado</h4>
-                            <p>Ampliação do público atendido e conformidade com diretrizes de acessibilidade.</p>
+                            <p>Exibição imediata do texto com fonte de fallback durante o carregamento.</p>
                         </div>
                         <div class="problem__field full">
                             <h4>Prioridade</h4>
-                            <p>Médio prazo.</p>
+                            <p>Curto prazo — correção de baixo custo e alto retorno.</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="problem">
                     <div class="problem__head">
-                        <div><span class="problem__id">PB-05</span><span class="problem__title">Ausência de dados
-                                estruturados em páginas de produto</span></div>
-                        <span class="crit crit--baixa">Baixa</span>
+                        <div><span class="problem__id">PB-06</span><span class="problem__title">CSS que bloqueia a
+                                renderização</span></div>
+                        <span class="crit crit--media">Média</span>
                     </div>
                     <div class="problem__body">
                         <div class="problem__field">
                             <h4>Descrição Técnica</h4>
-                            <p>Páginas de produto não possuem marcação schema.org, limitando a exibição de resultados
-                                enriquecidos em buscadores.</p>
+                            <p>Múltiplos arquivos CSS (front.used.css, post-20926.css, entre outros) bloqueiam a
+                                renderização inicial.</p>
                         </div>
                         <div class="problem__field">
                             <h4>Impacto</h4>
-                            <p>Menor taxa de cliques orgânicos em relação a concorrentes com dados estruturados
-                                implementados.</p>
+                            <p>Adiciona cerca de 100 ms ao carregamento percebido da página.</p>
                         </div>
                         <div class="problem__field">
                             <h4>Recomendação</h4>
-                            <p>Implementar marcação de produto, preço e avaliação conforme especificação schema.org.</p>
+                            <p>Ativar a otimização de entrega de CSS no WP Rocket (CSS crítico inline e demais
+                                adiados).</p>
                         </div>
                         <div class="problem__field">
                             <h4>Benefício Esperado</h4>
-                            <p>Melhoria gradual de visibilidade e taxa de cliques em resultados de busca.</p>
+                            <p>Redução do tempo de renderização inicial e melhoria adicional do LCP.</p>
                         </div>
                         <div class="problem__field full">
                             <h4>Prioridade</h4>
-                            <p>Longo prazo.</p>
+                            <p>Médio prazo.</p>
                         </div>
                     </div>
                 </div>
 
             </div>
             <div class="sheet__foot">
-                <span>NovaVarejo Tecnologia Ltda. — Confidencial</span>
+                <span>Fócon Engenharia — Confidencial</span>
                 <span class="pg" data-page></span>
             </div>
         </section>
@@ -1917,7 +1923,6 @@
         <section class="sheet">
             <div class="sheet__head"><strong>WDS-AUD-2026-0001</strong> · Relatório de Auditoria Técnica</div>
             <div class="sheet__body">
-
                 <h2 class="section-title"><span class="num">10</span> Roadmap de Melhorias</h2>
 
                 <div class="roadmap">
@@ -1932,13 +1937,20 @@
                                         headers de segurança</span><span class="roadmap__item-impact">Impacto
                                         alto</span></div>
                                 <p class="roadmap__item-desc">Prioridade máxima; reduz diretamente a superfície de
-                                    ataque da aplicação.</p>
+                                    ataque da página (XSS, clickjacking).</p>
                             </div>
                             <div class="roadmap__item">
-                                <div class="roadmap__item-top"><span class="roadmap__item-name">Restringir política de
-                                        CORS</span><span class="roadmap__item-impact">Impacto alto</span></div>
-                                <p class="roadmap__item-desc">Ajuste de configuração de baixo esforço e alto retorno em
-                                    segurança.</p>
+                                <div class="roadmap__item-top"><span class="roadmap__item-name">Corrigir contraste e
+                                        nomes acessíveis</span><span class="roadmap__item-impact">Impacto alto</span>
+                                </div>
+                                <p class="roadmap__item-desc">Ajuste do menu e adição de aria-label aos ícones de
+                                    navegação.</p>
+                            </div>
+                            <div class="roadmap__item">
+                                <div class="roadmap__item-top"><span class="roadmap__item-name">Aplicar font-display:
+                                        swap</span><span class="roadmap__item-impact">Impacto médio</span></div>
+                                <p class="roadmap__item-desc">Elimina o texto invisível durante o carregamento da fonte
+                                    Montserrat.</p>
                             </div>
                         </div>
                     </div>
@@ -1950,24 +1962,22 @@
                         </div>
                         <div class="roadmap__items">
                             <div class="roadmap__item">
-                                <div class="roadmap__item-top"><span class="roadmap__item-name">Camada de cache para
-                                        catálogo</span><span class="roadmap__item-impact">Impacto médio-alto</span>
+                                <div class="roadmap__item-top"><span class="roadmap__item-name">Otimizar entrega de
+                                        CSS</span><span class="roadmap__item-impact">Impacto médio-alto</span></div>
+                                <p class="roadmap__item-desc">Ativar a otimização de entrega de CSS no WP Rocket para
+                                    remover o bloqueio de renderização.</p>
+                            </div>
+                            <div class="roadmap__item">
+                                <div class="roadmap__item-top"><span class="roadmap__item-name">Adicionar dimensões às
+                                        imagens</span><span class="roadmap__item-impact">Impacto médio</span></div>
+                                <p class="roadmap__item-desc">Reserva o espaço no layout e reduz ainda mais o CLS.</p>
+                            </div>
+                            <div class="roadmap__item">
+                                <div class="roadmap__item-top"><span class="roadmap__item-name">Definir cache TTL para
+                                        fontes estáticas</span><span class="roadmap__item-impact">Impacto médio</span>
                                 </div>
-                                <p class="roadmap__item-desc">Reduz tempo de resposta e carga no banco de dados em
-                                    horários de pico.</p>
-                            </div>
-                            <div class="roadmap__item">
-                                <div class="roadmap__item-top"><span class="roadmap__item-name">Code-splitting e
-                                        otimização de imagens</span><span class="roadmap__item-impact">Impacto
-                                        médio-alto</span></div>
-                                <p class="roadmap__item-desc">Melhora direta nos indicadores de performance e Core Web
-                                    Vitals.</p>
-                            </div>
-                            <div class="roadmap__item">
-                                <div class="roadmap__item-top"><span class="roadmap__item-name">Revisão de contraste e
-                                        navegação por teclado</span><span class="roadmap__item-impact">Impacto
-                                        médio</span></div>
-                                <p class="roadmap__item-desc">Amplia acessibilidade dos fluxos principais de compra.</p>
+                                <p class="roadmap__item-desc">Reduz consumo de banda em visitas repetidas (ex.:
+                                    elementskit.woff).</p>
                             </div>
                         </div>
                     </div>
@@ -1979,18 +1989,21 @@
                         </div>
                         <div class="roadmap__items">
                             <div class="roadmap__item">
-                                <div class="roadmap__item-top"><span class="roadmap__item-name">Dados estruturados e
-                                        evolução de SEO</span><span class="roadmap__item-impact">Impacto gradual</span>
-                                </div>
-                                <p class="roadmap__item-desc">Melhoria contínua de visibilidade orgânica ao longo dos
-                                    próximos trimestres.</p>
+                                <div class="roadmap__item-top"><span class="roadmap__item-name">COOP e Trusted
+                                        Types</span><span class="roadmap__item-impact">Impacto estrutural</span></div>
+                                <p class="roadmap__item-desc">Reforço da camada de segurança contra ataques de
+                                    side-channel e XSS baseado em DOM.</p>
                             </div>
                             <div class="roadmap__item">
-                                <div class="roadmap__item-top"><span class="roadmap__item-name">Testes de carga e plano
-                                        de escalabilidade</span><span class="roadmap__item-impact">Impacto
-                                        estrutural</span></div>
-                                <p class="roadmap__item-desc">Prepara a arquitetura para o próximo estágio de
-                                    crescimento de tráfego.</p>
+                                <div class="roadmap__item-top"><span class="roadmap__item-name">Monitoramento contínuo
+                                        (RUM)</span><span class="roadmap__item-impact">Impacto gradual</span></div>
+                                <p class="roadmap__item-desc">Acompanhamento real das Core Web Vitals em produção.</p>
+                            </div>
+                            <div class="roadmap__item">
+                                <div class="roadmap__item-top"><span class="roadmap__item-name">Revisão de
+                                        acessibilidade</span><span class="roadmap__item-impact">Impacto gradual</span>
+                                </div>
+                                <p class="roadmap__item-desc">Evolução contínua da conformidade com WCAG.</p>
                             </div>
                         </div>
                     </div>
@@ -1999,25 +2012,28 @@
                 <h2 class="section-title" style="margin-top:9mm;"><span class="num">11</span> Conclusão</h2>
 
                 <div class="conclusion-box">
-                    <p><strong>Situação atual:</strong> a plataforma opera de forma estável em produção, com arquitetura
-                        de frontend e backend bem organizadas para o estágio atual do produto.</p>
+                    <p><strong>Situação atual:</strong> a landing page da Fócon Engenharia
+                        (foconengenharia.com.br) é um exemplo de excelente otimização de performance, com 98/100 no
+                        Lighthouse, Core Web Vitals aprovadas (LCP 0,4s) e experiência de carregamento muito superior à
+                        média do mercado.</p>
                     <p><strong>Oportunidades identificadas:</strong> os principais ganhos estão concentrados em
-                        segurança de aplicação web, performance de carregamento e maturidade de SEO técnico.</p>
+                        segurança de aplicação web (CSP, HSTS, COOP, clickjacking), acessibilidade (contraste e nomes
+                        acessíveis) e refinamentos de performance (fontes e entrega de CSS).</p>
                     <p><strong>Próximos passos recomendados:</strong> tratar os itens de curto prazo nos próximos 30
-                        dias, seguidos pela execução do plano de médio prazo, com revisão de progresso ao final de cada
-                        ciclo.</p>
+                        dias, priorizando segurança e acessibilidade, seguidos pela execução do plano de médio prazo,
+                        com revisão de progresso ao final de cada ciclo.</p>
                 </div>
 
                 <div class="signoff">
                     <div class="signoff__col">
                         <div class="signoff__line">
-                            <div class="signoff__name">[Nome do Auditor]</div>
-                            <div class="signoff__role">Responsável Técnico — [Nome da Empresa]</div>
+                            <div class="signoff__name">Wellington Ramos</div>
+                            <div class="signoff__role">Responsável Técnico — wellington-dev.com</div>
                         </div>
                     </div>
                     <div class="signoff__col">
                         <div class="signoff__line">
-                            <div class="signoff__name">NovaVarejo Tecnologia Ltda.</div>
+                            <div class="signoff__name">Fócon Engenharia</div>
                             <div class="signoff__role">Aceite do Cliente</div>
                         </div>
                     </div>
@@ -2025,9 +2041,12 @@
 
             </div>
             <div class="sheet__foot">
-                <span>NovaVarejo Tecnologia Ltda. — Confidencial</span>
+                <span>Fócon Engenharia — Confidencial</span>
                 <span class="pg" data-page></span>
             </div>
+            <div class="sheet__disclaimer">Elaborado por <strong>Wellington Ramos</strong> — wellington-dev.com — Todos
+                os dados utilizados nesta análise são de natureza pública e fazem parte do material entregue ao
+                cliente.</div>
         </section>
 
     </div>

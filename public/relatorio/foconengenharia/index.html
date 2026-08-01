@@ -1,0 +1,2048 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Auditoria Técnica — WDS-AUD-2026-0001</title>
+    <style>
+        /* ============================================================
+   TOKENS
+   ============================================================ */
+        :root {
+            --white: #FFFFFF;
+            --paper: #EEF0F2;
+            --gray-50: #F5F6F8;
+            --gray-100: #E9EBEE;
+            --gray-200: #DADDE2;
+            --gray-300: #C2C7CE;
+            --gray-500: #88919B;
+            --gray-600: #5B6470;
+            --gray-800: #2B323B;
+            --black: #171A1E;
+
+            --blue: #1E3A5C;
+            --blue-ink: #14283F;
+            --blue-tint: #E9F0F6;
+            --blue-line: #B9CBDC;
+
+            --green: #1F7A50;
+            --green-tint: #E6F4EC;
+            --yellow: #B8863A;
+            --yellow-tint: #FAF1E1;
+            --red: #B23A2E;
+            --red-tint: #FBEAE8;
+
+            --font-sans: "Inter", "Helvetica Neue", Arial, sans-serif;
+            --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+
+            --sheet-w: 210mm;
+            --sheet-h: 297mm;
+            --sheet-pad: 20mm;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--paper);
+            font-family: var(--font-sans);
+            color: var(--gray-800);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: var(--blue-tint);
+            color: var(--blue-ink);
+        }
+
+        /* ============================================================
+   SCREEN CHROME (hidden on print)
+   ============================================================ */
+        .screen-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            display: flex;
+            justify-content: center;
+            padding: 14px 0;
+            background: rgba(238, 240, 242, 0.9);
+            backdrop-filter: blur(6px);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .screen-bar__inner {
+            width: 100%;
+            max-width: var(--sheet-w);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8px;
+        }
+
+        .screen-bar__label {
+            font-size: 11.5px;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            color: var(--gray-600);
+            font-weight: 600;
+        }
+
+        .screen-bar__label span {
+            font-family: var(--font-mono);
+            color: var(--blue);
+        }
+
+        .print-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--blue);
+            color: var(--white);
+            border: none;
+            padding: 10px 18px;
+            font-family: var(--font-sans);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: .01em;
+            border-radius: 3px;
+            cursor: pointer;
+            box-shadow: 0 1px 2px rgba(20, 40, 63, .15);
+            transition: background .15s ease, transform .15s ease;
+        }
+
+        .print-btn:hover {
+            background: var(--blue-ink);
+        }
+
+        .print-btn:active {
+            transform: translateY(1px);
+        }
+
+        .print-btn svg {
+            width: 15px;
+            height: 15px;
+        }
+
+        .canvas {
+            padding-top: 64px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10mm;
+            padding-bottom: 16mm;
+        }
+
+        /* Bloqueia transbordamento lateral de qualquer card/sheet */
+        .sheet {
+            max-width: 100%;
+        }
+
+        /* ============================================================
+   SHEET / PAGE
+   ============================================================ */
+        .sheet {
+            position: relative;
+            width: var(--sheet-w);
+            min-height: var(--sheet-h);
+            background: var(--white);
+            box-shadow: 0 1px 3px rgba(20, 25, 30, .08), 0 12px 28px rgba(20, 25, 30, .10);
+            padding: var(--sheet-pad);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sheet__head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--gray-200);
+            padding-bottom: 8px;
+            margin-bottom: 9mm;
+            font-family: var(--font-mono);
+            font-size: 9px;
+            letter-spacing: .04em;
+            color: var(--gray-500);
+            text-transform: uppercase;
+        }
+
+        .sheet__head strong {
+            color: var(--gray-600);
+            font-weight: 600;
+        }
+
+        .sheet__body {
+            flex: 1;
+        }
+
+        .sheet__foot {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid var(--gray-200);
+            padding-top: 8px;
+            margin-top: 9mm;
+            font-family: var(--font-mono);
+            font-size: 9px;
+            color: var(--gray-500);
+            letter-spacing: .03em;
+        }
+
+        .sheet__foot .pg {
+            color: var(--gray-600);
+        }
+
+        /* ============================================================
+   TYPE
+   ============================================================ */
+        .eyebrow {
+            font-family: var(--font-mono);
+            font-size: 10.5px;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--blue);
+            font-weight: 600;
+            margin: 0 0 6px;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: var(--font-sans);
+            color: var(--black);
+            margin: 0;
+        }
+
+        h2.section-title {
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: -.01em;
+            text-transform: uppercase;
+            padding-bottom: 9px;
+            margin-bottom: 6mm;
+            border-bottom: 2px solid var(--black);
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+        }
+
+        h2.section-title .num {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--blue);
+            font-weight: 600;
+        }
+
+        h3.sub-title {
+            font-size: 12.5px;
+            font-weight: 700;
+            color: var(--blue-ink);
+            margin: 0 0 3mm;
+            padding-left: 10px;
+            border-left: 3px solid var(--blue);
+            text-transform: uppercase;
+            letter-spacing: .02em;
+        }
+
+        p {
+            line-height: 1.62;
+            font-size: 11.5px;
+            color: var(--gray-800);
+            margin: 0 0 3mm;
+        }
+
+        ul.plain {
+            margin: 0 0 3mm;
+            padding-left: 18px;
+        }
+
+        ul.plain li {
+            font-size: 11.5px;
+            line-height: 1.62;
+            margin-bottom: 1.6mm;
+            color: var(--gray-800);
+        }
+
+        /* ============================================================
+   COVER
+   ============================================================ */
+        .cover {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover__grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(var(--gray-100) 1px, transparent 1px),
+                linear-gradient(90deg, var(--gray-100) 1px, transparent 1px);
+            background-size: 8mm 8mm;
+            opacity: .55;
+            z-index: 0;
+        }
+
+        .cover__content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .cover__top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-bottom: 10mm;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .cover__mark {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .cover__mark-badge {
+            width: 30px;
+            height: 30px;
+            border: 1.5px solid var(--blue);
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 12px;
+            color: var(--blue);
+        }
+
+        .cover__mark-text {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .06em;
+            color: var(--gray-800);
+            text-transform: uppercase;
+            line-height: 1.3;
+        }
+
+        .cover__mark-text span {
+            display: block;
+            font-weight: 400;
+            color: var(--gray-500);
+            font-size: 9.5px;
+            letter-spacing: .03em;
+            text-transform: none;
+        }
+
+        .cover__id {
+            text-align: right;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--gray-600);
+        }
+
+        .cover__id strong {
+            display: block;
+            font-size: 12px;
+            color: var(--blue-ink);
+            letter-spacing: .02em;
+            margin-bottom: 2px;
+        }
+
+        .cover__title-block {
+            padding: 16mm 0 12mm;
+        }
+
+        .cover__title-block .eyebrow {
+            font-size: 11px;
+        }
+
+        .cover__title-block h1 {
+            font-size: 34px;
+            font-weight: 800;
+            letter-spacing: -.02em;
+            line-height: 1.12;
+            max-width: 150mm;
+            color: var(--black);
+        }
+
+        .cover__title-block .subhead {
+            margin-top: 5mm;
+            font-size: 13.5px;
+            color: var(--gray-600);
+            max-width: 130mm;
+            line-height: 1.55;
+        }
+
+        .cover__meta {
+            margin-top: auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0;
+            border: 1px solid var(--gray-200);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .cover__meta-cell {
+            padding: 6mm 7mm;
+            border-right: 1px solid var(--gray-200);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .cover__meta-cell:nth-child(2n) {
+            border-right: none;
+        }
+
+        .cover__meta-label {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--gray-500);
+            margin-bottom: 2mm;
+        }
+
+        .cover__meta-value {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--black);
+        }
+
+        .cover__meta-value small {
+            display: block;
+            font-weight: 400;
+            font-size: 10.5px;
+            color: var(--gray-600);
+            margin-top: 1mm;
+        }
+
+        .cover__gauge-row {
+            margin-top: 9mm;
+            display: flex;
+            align-items: center;
+            gap: 8mm;
+            padding-top: 9mm;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .cover__gauge-score {
+            font-family: var(--font-mono);
+            font-size: 44px;
+            font-weight: 700;
+            color: var(--blue-ink);
+            line-height: 1;
+        }
+
+        .cover__gauge-score sup {
+            font-size: 16px;
+            color: var(--gray-500);
+            font-weight: 500;
+        }
+
+        .cover__gauge-text {
+            font-size: 11px;
+            color: var(--gray-600);
+            max-width: 95mm;
+            line-height: 1.55;
+        }
+
+        .cover__gauge-text strong {
+            color: var(--black);
+        }
+
+        /* ============================================================
+   GAUGE / RULER (signature element)
+   ============================================================ */
+        .gauge {
+            display: flex;
+            flex-direction: column;
+            gap: 1.6mm;
+        }
+
+        .gauge__top {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .gauge__label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--black);
+        }
+
+        .gauge__score {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--blue-ink);
+        }
+
+        .gauge__track {
+            position: relative;
+            height: 6px;
+            background: var(--gray-100);
+            border-radius: 1px;
+            overflow: visible;
+        }
+
+        .gauge__fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            border-radius: 1px;
+            background: var(--blue);
+        }
+
+        .gauge__ticks {
+            position: relative;
+            height: 5px;
+            margin-top: 1px;
+        }
+
+        .gauge__ticks span {
+            position: absolute;
+            top: 0;
+            width: 1px;
+            height: 4px;
+            background: var(--gray-300);
+        }
+
+        .gauge__meta {
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--font-mono);
+            font-size: 8.5px;
+            color: var(--gray-500);
+            margin-top: .5mm;
+        }
+
+        /* ============================================================
+   DOCUMENT CONTROL TABLE / GENERIC TABLES
+   ============================================================ */
+        table.doc {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+            margin-bottom: 5mm;
+        }
+
+        table.doc th {
+            text-align: left;
+            font-family: var(--font-mono);
+            font-size: 9px;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            color: var(--gray-500);
+            font-weight: 600;
+            padding: 2.4mm 3mm;
+            border-bottom: 1.5px solid var(--gray-800);
+            background: var(--gray-50);
+        }
+
+        table.doc td {
+            padding: 2.8mm 3mm;
+            border-bottom: 1px solid var(--gray-200);
+            color: var(--gray-800);
+            vertical-align: top;
+        }
+
+        table.doc tr:last-child td {
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        table.doc td.mono,
+        table.doc th.mono {
+            font-family: var(--font-mono);
+            font-size: 10px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            border: 1px solid var(--gray-200);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 6mm;
+        }
+
+        .info-grid__cell {
+            padding: 4mm 5mm;
+            border-right: 1px solid var(--gray-200);
+            background: var(--gray-50);
+        }
+
+        .info-grid__cell:last-child {
+            border-right: none;
+        }
+
+        .info-grid__label {
+            font-family: var(--font-mono);
+            font-size: 8.5px;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            color: var(--gray-500);
+            margin-bottom: 1.6mm;
+        }
+
+        .info-grid__value {
+            font-size: 11.5px;
+            font-weight: 600;
+            color: var(--black);
+        }
+
+        /* ============================================================
+   EXEC SUMMARY / KPI GRID
+   ============================================================ */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5mm;
+            margin-top: 2mm;
+        }
+
+        .kpi-card {
+            border: 1px solid var(--gray-200);
+            border-radius: 3px;
+            padding: 5mm 5mm 4.5mm;
+            background: var(--gray-50);
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
+        .kpi-card__top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 3mm;
+        }
+
+        .kpi-card__name {
+            font-size: 10.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .03em;
+            color: var(--gray-800);
+        }
+
+        .kpi-card__score {
+            font-family: var(--font-mono);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--blue-ink);
+            line-height: 1;
+        }
+
+        .kpi-card__score small {
+            font-size: 11px;
+            color: var(--gray-500);
+            font-weight: 500;
+        }
+
+        .kpi-card__status {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 8.5px;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+            font-weight: 700;
+            padding: 1mm 2.2mm;
+            border-radius: 2px;
+            margin-bottom: 2.6mm;
+        }
+
+        .status--ok {
+            background: var(--green-tint);
+            color: var(--green);
+        }
+
+        .status--watch {
+            background: var(--yellow-tint);
+            color: var(--yellow);
+        }
+
+        .status--risk {
+            background: var(--red-tint);
+            color: var(--red);
+        }
+
+        .kpi-card__desc {
+            font-size: 10px;
+            line-height: 1.5;
+            color: var(--gray-600);
+            margin: 0;
+        }
+
+        /* ============================================================
+   ANALYSIS BLOCKS
+   ============================================================ */
+        .analysis-block {
+            margin-bottom: 8mm;
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
+        .analysis-block__intro {
+            margin-bottom: 3mm;
+        }
+
+        .criteria-row {
+            display: grid;
+            grid-template-columns: 38mm 1fr 22mm;
+            gap: 4mm;
+            align-items: start;
+            padding: 2.6mm 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .criteria-row__label {
+            font-size: 10.5px;
+            font-weight: 600;
+            color: var(--black);
+            padding-top: .5mm;
+        }
+
+        .criteria-row__desc {
+            font-size: 10.5px;
+            line-height: 1.55;
+            color: var(--gray-600);
+        }
+
+        .criteria-row__tag {
+            font-family: var(--font-mono);
+            font-size: 8.5px;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+            font-weight: 700;
+            padding: 1mm 2mm;
+            border-radius: 2px;
+            text-align: center;
+            height: fit-content;
+            justify-self: end;
+        }
+
+        /* ============================================================
+   PROBLEM CARDS
+   ============================================================ */
+        .problem {
+            border: 1px solid var(--gray-200);
+            border-radius: 3px;
+            margin-bottom: 5mm;
+            overflow: hidden;
+            background: var(--white);
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
+        .problem__head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 3.5mm 5mm;
+            background: var(--gray-50);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .problem__id {
+            font-family: var(--font-mono);
+            font-size: 9.5px;
+            color: var(--gray-500);
+            margin-right: 2.5mm;
+        }
+
+        .problem__title {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--black);
+        }
+
+        .crit {
+            font-family: var(--font-mono);
+            font-size: 8.5px;
+            font-weight: 700;
+            letter-spacing: .05em;
+            text-transform: uppercase;
+            padding: 1.2mm 2.6mm;
+            border-radius: 2px;
+            white-space: nowrap;
+        }
+
+        .crit--baixa {
+            background: var(--green-tint);
+            color: var(--green);
+        }
+
+        .crit--media {
+            background: var(--yellow-tint);
+            color: var(--yellow);
+        }
+
+        .crit--alta {
+            background: #FCE4DE;
+            color: #A6432B;
+        }
+
+        .crit--critica {
+            background: var(--red-tint);
+            color: var(--red);
+        }
+
+        .problem__body {
+            padding: 4.5mm 5mm 5mm;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4mm 8mm;
+        }
+
+        .problem__field {}
+
+        .problem__field h4 {
+            font-family: var(--font-mono);
+            font-size: 8.5px;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            color: var(--gray-500);
+            margin-bottom: 1.6mm;
+            font-weight: 600;
+        }
+
+        .problem__field p {
+            font-size: 10.5px;
+            margin: 0;
+            line-height: 1.55;
+        }
+
+        .problem__field.full {
+            grid-column: 1 / -1;
+        }
+
+        /* ============================================================
+   ROADMAP
+   ============================================================ */
+        .roadmap {
+            display: flex;
+            flex-direction: column;
+            gap: 6mm;
+        }
+
+        .roadmap__phase {
+            display: grid;
+            grid-template-columns: 32mm 1fr;
+            gap: 6mm;
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
+        .roadmap__phase-label {}
+
+        .roadmap__phase-name {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .03em;
+            color: var(--blue-ink);
+        }
+
+        .roadmap__phase-time {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            color: var(--gray-500);
+            margin-top: 1mm;
+        }
+
+        .roadmap__items {
+            border-left: 2px solid var(--gray-200);
+            padding-left: 5mm;
+            display: flex;
+            flex-direction: column;
+            gap: 3.5mm;
+        }
+
+        .roadmap__item {
+            position: relative;
+        }
+
+        .roadmap__item::before {
+            content: "";
+            position: absolute;
+            left: -6.8mm;
+            top: 1.5mm;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 2px solid var(--blue);
+        }
+
+        .roadmap__item-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: .8mm;
+        }
+
+        .roadmap__item-name {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--black);
+        }
+
+        .roadmap__item-impact {
+            font-family: var(--font-mono);
+            font-size: 8.5px;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: .03em;
+        }
+
+        .roadmap__item-desc {
+            font-size: 10.5px;
+            color: var(--gray-600);
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* ============================================================
+   CONCLUSION
+   ============================================================ */
+        .conclusion-box {
+            border-left: 3px solid var(--blue);
+            background: var(--blue-tint);
+            padding: 6mm 7mm;
+            margin-bottom: 6mm;
+            border-radius: 0 3px 3px 0;
+        }
+
+        .conclusion-box p {
+            color: var(--blue-ink);
+            margin-bottom: 2.5mm;
+        }
+
+        .conclusion-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .signoff {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12mm;
+            margin-top: 14mm;
+            padding-top: 8mm;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .signoff__col {
+            text-align: left;
+        }
+
+        .signoff__line {
+            border-top: 1px solid var(--gray-800);
+            padding-top: 2.5mm;
+            margin-top: 14mm;
+        }
+
+        .signoff__name {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--black);
+        }
+
+        .signoff__role {
+            font-size: 9.5px;
+            color: var(--gray-500);
+            margin-top: .6mm;
+        }
+
+        /* ============================================================
+   PRINT
+   ============================================================ */
+        @media print {
+            .screen-bar {
+                display: none !important;
+            }
+
+            .canvas {
+                padding-top: 0;
+                padding-bottom: 0;
+                gap: 0;
+            }
+
+            body {
+                background: var(--white);
+            }
+
+            /* Preserva as cores de fundo dos cards no papel */
+            *,
+            *::before,
+            *::after {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .sheet {
+                box-shadow: none;
+                margin: 0;
+                width: 210mm;
+                min-height: 297mm;
+                max-width: 210mm;
+                padding: 16mm 20mm;
+                page-break-after: always;
+                break-after: page;
+            }
+
+            .sheet__head {
+                margin-bottom: 6mm;
+            }
+
+            .sheet__foot {
+                margin-top: 5mm;
+            }
+
+            .analysis-block {
+                margin-bottom: 5mm;
+            }
+
+            .criteria-row {
+                padding: 2mm 0;
+            }
+
+            .sheet:last-child {
+                page-break-after: auto;
+                break-after: auto;
+            }
+
+            .cover__grid {
+                opacity: .4;
+            }
+
+            .kpi-card,
+            .problem,
+            .roadmap__phase,
+            .analysis-block,
+            table.doc,
+            .criteria-row {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            .info-grid__cell {
+                background: var(--gray-50);
+            }
+        }
+
+        @media screen and (max-width: 900px) {
+            .sheet {
+                width: 100%;
+                padding: 8mm;
+                min-height: auto;
+            }
+
+            .cover__meta {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .cover__title-block h1 {
+                font-size: 26px;
+            }
+
+            .cover__gauge-row {
+                gap: 4mm;
+                flex-wrap: wrap;
+            }
+
+            .cover__gauge-score {
+                font-size: 34px;
+            }
+
+            .kpi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .info-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .info-grid__cell:nth-child(2n) {
+                border-right: none;
+            }
+
+            .info-grid__cell:nth-child(-n+2) {
+                border-bottom: 1px solid var(--gray-200);
+            }
+
+            .problem__body {
+                grid-template-columns: 1fr;
+            }
+
+            .roadmap__phase {
+                grid-template-columns: 1fr;
+                gap: 3mm;
+            }
+
+            .signoff {
+                grid-template-columns: 1fr;
+                gap: 8mm;
+            }
+
+            .criteria-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .cover__meta {
+                grid-template-columns: 1fr;
+            }
+
+            .cover__meta-cell,
+            .cover__meta-cell:nth-child(2n) {
+                border-right: none;
+            }
+
+            .kpi-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .info-grid__cell,
+            .info-grid__cell:nth-child(2n) {
+                border-right: none;
+                border-bottom: 1px solid var(--gray-200);
+            }
+
+            .info-grid__cell:last-child {
+                border-bottom: none;
+            }
+
+            .cover__title-block h1 {
+                font-size: 22px;
+            }
+
+            .sheet__foot {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 2mm;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="screen-bar">
+        <div class="screen-bar__inner">
+            <div class="screen-bar__label">Documento <span>WDS-AUD-2026-0001</span> — pré-visualização</div>
+            <button class="print-btn" onclick="window.print()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M6 9V2h12v7" />
+                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+                    <rect x="6" y="14" width="12" height="8" />
+                </svg>
+                Imprimir / Exportar PDF
+            </button>
+        </div>
+    </div>
+
+    <div class="canvas" id="canvas">
+
+        <!-- ============================================================
+       SHEET 01 — CAPA
+       ============================================================ -->
+        <section class="sheet cover">
+            <div class="cover__grid"></div>
+            <div class="cover__content">
+
+                <div class="cover__top">
+                    <div class="cover__mark">
+                        <div class="cover__mark-badge">W</div>
+                        <div class="cover__mark-text">Consultoria Técnica<span>Auditoria de Software &amp; Produto
+                                Digital</span></div>
+                    </div>
+                    <div class="cover__id">
+                        <strong>WDS-AUD-2026-0001</strong>
+                        Emitido em 31/07/2026
+                    </div>
+                </div>
+
+                <div class="cover__title-block">
+                    <p class="eyebrow">Relatório de Auditoria Técnica</p>
+                    <h1>Diagnóstico técnico completo de frontend, backend, segurança e performance.</h1>
+                    <p class="subhead">Avaliação independente da plataforma digital do cliente, com identificação de
+                        riscos, priorização de correções e recomendações de evolução técnica de curto, médio e longo
+                        prazo.</p>
+                </div>
+
+                <div class="cover__meta">
+                    <div class="cover__meta-cell">
+                        <div class="info-grid__label" style="margin-bottom:2mm;">Cliente</div>
+                        <div class="cover__meta-value">NovaVarejo Tecnologia Ltda.<small>Rede de comércio local e
+                                delivery</small></div>
+                    </div>
+                    <div class="cover__meta-cell">
+                        <div class="info-grid__label" style="margin-bottom:2mm;">Sistema Analisado</div>
+                        <div class="cover__meta-value">app.novavarejo.com.br<small>Plataforma web e painel
+                                administrativo</small></div>
+                    </div>
+                    <div class="cover__meta-cell">
+                        <div class="info-grid__label" style="margin-bottom:2mm;">Data da Auditoria</div>
+                        <div class="cover__meta-value">21 a 28/07/2026<small>Análise técnica em ambiente de
+                                produção</small></div>
+                    </div>
+                    <div class="cover__meta-cell">
+                        <div class="info-grid__label" style="margin-bottom:2mm;">Data de Emissão</div>
+                        <div class="cover__meta-value">31/07/2026<small>Versão do relatório 1.0.0</small></div>
+                    </div>
+                    <div class="cover__meta-cell">
+                        <div class="info-grid__label" style="margin-bottom:2mm;">Responsável Técnico</div>
+                        <div class="cover__meta-value">[Nome do Auditor]<small>Consultor de Produto &amp; Engenharia
+                                Frontend</small></div>
+                    </div>
+                    <div class="cover__meta-cell">
+                        <div class="info-grid__label" style="margin-bottom:2mm;">Empresa Responsável</div>
+                        <div class="cover__meta-value">[Nome da Empresa]<small>Consultoria técnica independente</small>
+                        </div>
+                    </div>
+                    <div class="cover__meta-cell">
+                        <div class="info-grid__label" style="margin-bottom:2mm;">Identificador</div>
+                        <div class="cover__meta-value">WDS-AUD-2026-0001<small>Ciclo de auditoria 2026 · Q3</small>
+                        </div>
+                    </div>
+                    <div class="cover__meta-cell">
+                        <div class="info-grid__label" style="margin-bottom:2mm;">Status do Documento</div>
+                        <div class="cover__meta-value">Emitido<small>Pronto para apresentação</small></div>
+                    </div>
+                </div>
+
+                <div class="cover__gauge-row">
+                    <div class="cover__gauge-score">68<sup>/100</sup></div>
+                    <div class="cover__gauge-text"><strong>Maturidade técnica geral: Adequada, com pendências
+                            relevantes.</strong> A plataforma está estável em produção, mas concentra riscos de
+                        segurança e performance que devem ser tratados antes da próxima fase de crescimento.</div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ============================================================
+       SHEET 02 — CONTROLE DO DOCUMENTO + RESUMO EXECUTIVO
+       ============================================================ -->
+        <section class="sheet">
+            <div class="sheet__head"><strong>WDS-AUD-2026-0001</strong> · Relatório de Auditoria Técnica</div>
+            <div class="sheet__body">
+
+                <h2 class="section-title"><span class="num">01</span> Controle do Documento</h2>
+
+                <div class="info-grid">
+                    <div class="info-grid__cell">
+                        <div class="info-grid__label">Versão Atual</div>
+                        <div class="info-grid__value">1.0.0</div>
+                    </div>
+                    <div class="info-grid__cell">
+                        <div class="info-grid__label">Data</div>
+                        <div class="info-grid__value">31/07/2026</div>
+                    </div>
+                    <div class="info-grid__cell">
+                        <div class="info-grid__label">Status</div>
+                        <div class="info-grid__value">Emitido</div>
+                    </div>
+                    <div class="info-grid__cell">
+                        <div class="info-grid__label">Responsável</div>
+                        <div class="info-grid__value">[Nome do Auditor]</div>
+                    </div>
+                </div>
+
+                <table class="doc">
+                    <thead>
+                        <tr>
+                            <th class="mono" style="width:16%;">Versão</th>
+                            <th class="mono" style="width:20%;">Data</th>
+                            <th>Alteração</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="mono">1.0.0</td>
+                            <td class="mono">31/07/2026</td>
+                            <td>Primeira emissão do relatório, com escopo completo de frontend, backend, segurança,
+                                performance e SEO.</td>
+                        </tr>
+                        <tr>
+                            <td class="mono">0.2.0</td>
+                            <td class="mono">27/07/2026</td>
+                            <td>Consolidação dos achados técnicos e priorização do registro de problemas.</td>
+                        </tr>
+                        <tr>
+                            <td class="mono">0.1.0</td>
+                            <td class="mono">21/07/2026</td>
+                            <td>Abertura da auditoria e definição de escopo com o cliente.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2 class="section-title" style="margin-top:9mm;"><span class="num">02</span> Resumo Executivo</h2>
+
+                <h3 class="sub-title">Objetivo da Auditoria</h3>
+                <p>Esta auditoria tem como objetivo avaliar a maturidade técnica da plataforma
+                    <strong>app.novavarejo.com.br</strong> nas dimensões de frontend, backend, segurança, performance e
+                    SEO, identificando riscos, oportunidades de melhoria e recomendações priorizadas para orientar o
+                    roadmap técnico dos próximos trimestres.</p>
+
+                <h3 class="sub-title">Visão Geral da Aplicação</h3>
+                <p>A aplicação é uma plataforma de comércio local com aplicativo de consumidor, painel administrativo
+                    para lojistas e API central que integra catálogo, pedidos e logística de entrega. O sistema está em
+                    produção, com tráfego contínuo de usuários finais e integrações ativas com meios de pagamento e
+                    serviços de geolocalização.</p>
+
+                <h3 class="sub-title">Principais Pontos Encontrados</h3>
+                <ul class="plain">
+                    <li>Boa organização geral de componentes de frontend, com oportunidades claras de otimização de
+                        carregamento de imagens e scripts.</li>
+                    <li>Ausência de cabeçalhos de segurança essenciais (CSP, HSTS) na aplicação web pública.</li>
+                    <li>Tempos de resposta da API acima do recomendado em endpoints de listagem de catálogo sob carga.
+                    </li>
+                    <li>Estrutura de metadados e dados estruturados incompleta, limitando o desempenho em buscas
+                        orgânicas.</li>
+                    <li>Boas práticas de versionamento e testes automatizados presentes no backend, com cobertura ainda
+                        parcial.</li>
+                </ul>
+
+                <h3 class="sub-title">Avaliação Geral</h3>
+                <p>A plataforma apresenta uma base técnica sólida e estável para o estágio atual do produto. Os riscos
+                    identificados são majoritariamente tratáveis em curto e médio prazo, sem necessidade de
+                    reestruturação arquitetural. Recomenda-se priorizar os itens de segurança e performance descritos
+                    nas seções seguintes antes de ciclos de crescimento de tráfego.</p>
+
+            </div>
+            <div class="sheet__foot">
+                <span>NovaVarejo Tecnologia Ltda. — Confidencial</span>
+                <span class="pg" data-page></span>
+            </div>
+        </section>
+
+        <!-- ============================================================
+       SHEET 03 — INDICADORES TÉCNICOS
+       ============================================================ -->
+        <section class="sheet">
+            <div class="sheet__head"><strong>WDS-AUD-2026-0001</strong> · Relatório de Auditoria Técnica</div>
+            <div class="sheet__body">
+
+                <h2 class="section-title"><span class="num">03</span> Indicadores Técnicos</h2>
+                <p style="margin-bottom:6mm;">Nota consolidada por dimensão avaliada, em escala de 0 a 100, com status
+                    de referência para leitura rápida.</p>
+
+                <div class="kpi-grid">
+
+                    <div class="kpi-card">
+                        <div class="kpi-card__top">
+                            <div class="kpi-card__name">Performance</div>
+                            <div class="kpi-card__score">61<small>/100</small></div>
+                        </div>
+                        <div class="kpi-card__status status--watch">Atenção</div>
+                        <p class="kpi-card__desc">Tempo de carregamento inicial acima do ideal em conexões móveis;
+                            oportunidade em otimização de imagens e code-splitting.</p>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-card__top">
+                            <div class="kpi-card__name">Segurança</div>
+                            <div class="kpi-card__score">54<small>/100</small></div>
+                        </div>
+                        <div class="kpi-card__status status--risk">Risco</div>
+                        <p class="kpi-card__desc">Ausência de cabeçalhos HTTP essenciais e política de CORS mais
+                            permissiva do que o necessário.</p>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-card__top">
+                            <div class="kpi-card__name">SEO</div>
+                            <div class="kpi-card__score">58<small>/100</small></div>
+                        </div>
+                        <div class="kpi-card__status status--watch">Atenção</div>
+                        <p class="kpi-card__desc">Metadados incompletos em páginas de produto e ausência de dados
+                            estruturados.</p>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-card__top">
+                            <div class="kpi-card__name">Frontend</div>
+                            <div class="kpi-card__score">76<small>/100</small></div>
+                        </div>
+                        <div class="kpi-card__status status--ok">Adequado</div>
+                        <p class="kpi-card__desc">Componentização consistente e boa responsividade; pontos de melhoria
+                            em acessibilidade.</p>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-card__top">
+                            <div class="kpi-card__name">Backend</div>
+                            <div class="kpi-card__score">72<small>/100</small></div>
+                        </div>
+                        <div class="kpi-card__status status--ok">Adequado</div>
+                        <p class="kpi-card__desc">Arquitetura de API bem definida; cache e escalabilidade demandam
+                            evolução para o próximo estágio.</p>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-card__top">
+                            <div class="kpi-card__name">UX</div>
+                            <div class="kpi-card__score">79<small>/100</small></div>
+                        </div>
+                        <div class="kpi-card__status status--ok">Adequado</div>
+                        <p class="kpi-card__desc">Fluxos principais de compra e acompanhamento de pedido são claros e
+                            diretos.</p>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-card__top">
+                            <div class="kpi-card__name">Acessibilidade</div>
+                            <div class="kpi-card__score">49<small>/100</small></div>
+                        </div>
+                        <div class="kpi-card__status status--risk">Risco</div>
+                        <p class="kpi-card__desc">Contraste insuficiente em elementos secundários e navegação por
+                            teclado incompleta.</p>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-card__top">
+                            <div class="kpi-card__name">Arquitetura</div>
+                            <div class="kpi-card__score">74<small>/100</small></div>
+                        </div>
+                        <div class="kpi-card__status status--ok">Adequado</div>
+                        <p class="kpi-card__desc">Separação clara de responsabilidades entre serviços, com débito
+                            técnico controlado.</p>
+                    </div>
+
+                </div>
+
+                <h3 class="sub-title" style="margin-top:9mm;">Leitura Consolidada por Escala</h3>
+                <div style="display:flex; flex-direction:column; gap:4mm; margin-top:4mm;">
+                    <div class="gauge">
+                        <div class="gauge__top"><span class="gauge__label">Média Geral da Plataforma</span><span
+                                class="gauge__score">65 / 100</span></div>
+                        <div class="gauge__track">
+                            <div class="gauge__fill" style="width:65%;"></div>
+                        </div>
+                        <div class="gauge__ticks"><span style="left:0%"></span><span style="left:25%"></span><span
+                                style="left:50%"></span><span style="left:75%"></span><span style="left:100%"></span>
+                        </div>
+                        <div class="gauge__meta">
+                            <span>0</span><span>25</span><span>50</span><span>75</span><span>100</span></div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="sheet__foot">
+                <span>NovaVarejo Tecnologia Ltda. — Confidencial</span>
+                <span class="pg" data-page></span>
+            </div>
+        </section>
+
+        <!-- ============================================================
+       SHEET 04 — ANÁLISE TÉCNICA: FRONTEND + BACKEND
+       ============================================================ -->
+        <section class="sheet">
+            <div class="sheet__head"><strong>WDS-AUD-2026-0001</strong> · Relatório de Auditoria Técnica</div>
+            <div class="sheet__body">
+
+                <h2 class="section-title"><span class="num">04</span> Análise Técnica — Frontend</h2>
+
+                <div class="analysis-block">
+                    <div class="criteria-row">
+                        <div class="criteria-row__label">Arquitetura</div>
+                        <div class="criteria-row__desc">Estrutura de componentes organizada por domínio, com separação
+                            razoável entre camadas de apresentação e lógica de negócio.</div>
+                        <div class="criteria-row__tag" style="background:var(--green-tint); color:var(--green);">
+                            Adequado</div>
+                    </div>
+                    <div class="criteria-row">
+                        <div class="criteria-row__label">Componentes</div>
+                        <div class="criteria-row__desc">Reuso consistente de componentes de interface, ainda que sem um
+                            design system formalmente documentado.</div>
+                        <div class="criteria-row__tag" style="background:var(--yellow-tint); color:var(--yellow);">
+                            Atenção</div>
+                    </div>
+                    <div class="criteria-row">
+                        <div class="criteria-row__label">Responsividade</div>
+                        <div class="criteria-row__desc">Boa adaptação entre desktop e mobile nos fluxos principais;
+                            pontos de quebra em telas intermediárias no painel do lojista.</div>
+                        <div class="criteria-row__tag" style="background:var(--green-tint); color:var(--green);">
+                            Adequado</div>
+                    </div>
+                    <div class="criteria-row">
+                        <div class="criteria-row__label">Experiência do Usuário</div>
+                        <div class="criteria-row__desc">Fluxo de checkout objetivo, com poucas etapas; feedback de erro
+                            pode ser mais claro em falhas de pagamento.</div>
+                        <div class="criteria-row__tag" style="background:var(--green-tint); color:var(--green);">
+                            Adequado</div>
+                    </div>
+                    <div class="criteria-row">
+                        <div class="criteria-row__label">Performance de Carregamento</div>
+                        <div class="criteria-row__desc">Tempo de interação inicial acima do recomendado em 3G/4G,
+                            associado a bundles não divididos por rota.</div>
+                        <div class="criteria-row__tag" style="background:#FCE4DE; color:#A6432B;">Alta prioridade</div>
+                    </div>
+                    <div class="criteria-row">
+                        <div class="criteria-row__label">Imagens</div>
+                        <div class="criteria-row__desc">Ausência de formatos modernos (WebP/AVIF) e de carregamento
+                            progressivo em listagens de produto.</div>
+                        <div class="criteria-row__tag" style="background:var(--yellow-tint); color:var(--yellow);">
+                            Atenção</div>
+                    </div>
+                    <div class="criteria-row">
+                        <div class="criteria-row__label">Acessibilidade</div>
+                        <div class="criteria-row__desc">Falta de rótulos ARIA em componentes interativos e contraste
+                            insuficiente em textos secundários.</div>
+                        <div class="criteria-row__tag" style="background:var(--red-tint); color:var(--red);">Risco</div>
+                    </div>
+                    <div class="criteria-row" style="border-bottom:none;">
+                        <div class="criteria-row__label">Otimização</div>
+                        <div class="criteria-row__desc">Ausência de lazy loading em rotas secundárias e de compressão
+                            adequada de ativos estáticos.</div>
+                        <div class="criteria-row__tag" style="background:var(--yellow-tint); color:var(--yellow);">
+                            Atenção</div>
+                    </div>
+                </div>
+
+                <h2 class="section-title" style="margin-top:6mm;"><span class="num">05</span> Análise Técnica — Backend
+                </h2>
+
+                <div class="analysis-block">
+                    <div class="criteria-row">
+                        <div class="criteria-row__label">Arquitetura da API</div>
+                        <div class="criteria-row__desc">API REST bem estruturada, com contratos consistentes entre os
+                            principais recursos do sistema.</div>
+                        <div class="criteria-row__tag" style="background:var(--green-tint); color:var(--green);">
+                            Adequado</div>
+                    </div>
+                    <div class="criteria-row">
+                        <div class="criteria-row__label">Segurança</div>
+                        <div class="criteria-row__desc">Autenticação e autorização implementadas corretamente; ausência
+                            de rate limiting em endpoints públicos.</div>
+                        <div class="criteria-row__tag" style="background:var(--yellow-tint); color:var(--yellow);">
+                            Atenção</div>
+                    </div>
+                    <div class="criteria-row">
+                        <div class="criteria-row__label">Cache</div>
+                        <div class="criteria-row__desc">Estratégia de cache ausente em endpoints de catálogo de alta
+                            frequência de leitura.</div>
+                        <div class="criteria-row__tag" style="background:#FCE4DE; color:#A6432B;">Alta prioridade</div>
+                    </div>
+                    <div class="criteria-row">
+                        <div class="criteria-row__label">Tratamento de Erros</div>
+                        <div class="criteria-row__desc">Respostas de erro padronizadas, com bom nível de detalhe para
+                            depuração sem expor dados sensíveis.</div>
+                        <div class="criteria-row__tag" style="background:var(--green-tint); color:var(--green);">
+                            Adequado</div>
+                    </div>
+                    <div class="criteria-row">
+                        <div class="criteria-row__label">Escalabilidade</div>
+                        <div class="criteria-row__desc">Serviços preparados para escala horizontal, ainda sem testes de
+                            carga formais documentados.</div>
+                        <div class="criteria-row__tag" style="background:var(--yellow-tint); color:var(--yellow);">
+                            Atenção</div>
+                    </div>
+                    <div class="criteria-row">
+                        <div class="criteria-row__label">Banco de Dados</div>
+                        <div class="criteria-row__desc">Modelagem consistente, com oportunidade de indexação adicional
+                            em consultas de pedidos por período.</div>
+                        <div class="criteria-row__tag" style="background:var(--yellow-tint); color:var(--yellow);">
+                            Atenção</div>
+                    </div>
+                    <div class="criteria-row" style="border-bottom:none;">
+                        <div class="criteria-row__label">Integrações</div>
+                        <div class="criteria-row__desc">Integrações de pagamento e geolocalização estáveis, com
+                            monitoramento de falhas adequado.</div>
+                        <div class="criteria-row__tag" style="background:var(--green-tint); color:var(--green);">
+                            Adequado</div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="sheet__foot">
+                <span>NovaVarejo Tecnologia Ltda. — Confidencial</span>
+                <span class="pg" data-page></span>
+            </div>
+        </section>
+
+        <!-- ============================================================
+       SHEET 05 — ANÁLISE TÉCNICA: SEGURANÇA + PERFORMANCE + SEO
+       ============================================================ -->
+        <section class="sheet">
+            <div class="sheet__head"><strong>WDS-AUD-2026-0001</strong> · Relatório de Auditoria Técnica</div>
+            <div class="sheet__body">
+
+                <h2 class="section-title"><span class="num">06</span> Análise Técnica — Segurança</h2>
+                <div class="analysis-block">
+                    <div class="criteria-row">
+                        <div class="criteria-row__label">HTTPS</div>
+                        <div class="criteria-row__desc">Certificado válido e redirecionamento forçado em todas as rotas
+                            públicas.</div>
+                        <div class="criteria-row__tag" style="background:var(--green-tint); color:var(--green);">
+                            Adequado</div>
+                    </div>
+                    <div class="criteria-row">
+                        <div class="criteria-row__label">Headers HTTP</div>
+                        <div class="criteria-row__desc">Ausência de Content-Security-Policy e Strict-Transport-Security
+                            na aplicação web.</div>
+                        <div class="criteria-row__tag" style="background:var(--red-tint); color:var(--red);">Risco</div>
+                    </div>
+                    <div class="criteria-row">
+                        <div class="criteria-row__label">Cookies</div>
+                        <div class="criteria-row__desc">Cookies de sessão sem atributo SameSite definido explicitamente.
+                        </div>
+                        <div class="criteria-row__tag" style="background:var(--yellow-tint); color:var(--yellow);">
+                            Atenção</div>
+                    </div>
+                    <div class="criteria-row">
+                        <div class="criteria-row__label">CORS</div>
+                        <div class="criteria-row__desc">Política atual permite origens além do necessário para o
+                            funcionamento da aplicação.</div>
+                        <div class="criteria-row__tag" style="background:#FCE4DE; color:#A6432B;">Alta prioridade</div>
+                    </div>
+                    <div class="criteria-row">
+                        <div class="criteria-row__label">CSP</div>
+                        <div class="criteria-row__desc">Não implementada; recomenda-se política restritiva para scripts
+                            e origens de conteúdo.</div>
+                        <div class="criteria-row__tag" style="background:var(--red-tint); color:var(--red);">Risco</div>
+                    </div>
+                    <div class="criteria-row">
+                        <div class="criteria-row__label">Exposição de Informações</div>
+                        <div class="criteria-row__desc">Cabeçalho de servidor expõe versão de tecnologia utilizada,
+                            facilitando reconhecimento por terceiros.</div>
+                        <div class="criteria-row__tag" style="background:var(--yellow-tint); color:var(--yellow);">
+                            Atenção</div>
+                    </div>
+                    <div class="criteria-row" style="border-bottom:none;">
+                        <div class="criteria-row__label">Boas Práticas</div>
+                        <div class="criteria-row__desc">Gestão de segredos e variáveis de ambiente segue boas práticas
+                            de mercado.</div>
+                        <div class="criteria-row__tag" style="background:var(--green-tint); color:var(--green);">
+                            Adequado</div>
+                    </div>
+                </div>
+
+                <h2 class="section-title" style="margin-top:6mm;"><span class="num">07</span> Análise Técnica —
+                    Performance</h2>
+                <div class="analysis-block">
+                    <div class="criteria-row">
+                        <div class="criteria-row__label">Carregamento</div>
+                        <div class="criteria-row__desc">Tempo até interatividade acima de 4s em conexões móveis
+                            simuladas.</div>
+                        <div class="criteria-row__tag" style="background:#FCE4DE; color:#A6432B;">Alta prioridade</div>
+                    </div>
+                    <div class="criteria-row">
+                        <div class="criteria-row__label">Core Web Vitals</div>
+                        <div class="criteria-row__desc">LCP e CLS dentro do aceitável; INP acima do recomendado nas
+                            páginas de listagem.</div>
+                        <div class="criteria-row__tag" style="background:var(--yellow-tint); color:var(--yellow);">
+                            Atenção</div>
+                    </div>
+                    <div class="criteria-row">
+                        <div class="criteria-row__label">Tamanho dos Arquivos</div>
+                        <div class="criteria-row__desc">Bundle principal acima de 450kb comprimido, sem divisão por
+                            rota.</div>
+                        <div class="criteria-row__tag" style="background:var(--yellow-tint); color:var(--yellow);">
+                            Atenção</div>
+                    </div>
+                    <div class="criteria-row">
+                        <div class="criteria-row__label">Requisições</div>
+                        <div class="criteria-row__desc">Número elevado de chamadas simultâneas na tela inicial, sem
+                            agrupamento.</div>
+                        <div class="criteria-row__tag" style="background:var(--yellow-tint); color:var(--yellow);">
+                            Atenção</div>
+                    </div>
+                    <div class="criteria-row" style="border-bottom:none;">
+                        <div class="criteria-row__label">Otimizações Possíveis</div>
+                        <div class="criteria-row__desc">Code-splitting, cache de API e compressão de imagens como ações
+                            de maior retorno.</div>
+                        <div class="criteria-row__tag" style="background:var(--blue-tint); color:var(--blue);">
+                            Recomendado</div>
+                    </div>
+                </div>
+
+                <h2 class="section-title" style="margin-top:6mm;"><span class="num">08</span> Análise Técnica — SEO</h2>
+                <div class="analysis-block">
+                    <div class="criteria-row">
+                        <div class="criteria-row__label">Metadata</div>
+                        <div class="criteria-row__desc">Títulos e descrições ausentes ou duplicados em parte das páginas
+                            de produto.</div>
+                        <div class="criteria-row__tag" style="background:var(--yellow-tint); color:var(--yellow);">
+                            Atenção</div>
+                    </div>
+                    <div class="criteria-row">
+                        <div class="criteria-row__label">Indexação</div>
+                        <div class="criteria-row__desc">Páginas principais indexadas corretamente pelos mecanismos de
+                            busca.</div>
+                        <div class="criteria-row__tag" style="background:var(--green-tint); color:var(--green);">
+                            Adequado</div>
+                    </div>
+                    <div class="criteria-row">
+                        <div class="criteria-row__label">Sitemap</div>
+                        <div class="criteria-row__desc">Sitemap presente, sem atualização automática ao publicar novos
+                            produtos.</div>
+                        <div class="criteria-row__tag" style="background:var(--yellow-tint); color:var(--yellow);">
+                            Atenção</div>
+                    </div>
+                    <div class="criteria-row">
+                        <div class="criteria-row__label">Robots</div>
+                        <div class="criteria-row__desc">Arquivo configurado corretamente, sem bloqueios indevidos de
+                            rotas relevantes.</div>
+                        <div class="criteria-row__tag" style="background:var(--green-tint); color:var(--green);">
+                            Adequado</div>
+                    </div>
+                    <div class="criteria-row">
+                        <div class="criteria-row__label">Estrutura HTML</div>
+                        <div class="criteria-row__desc">Hierarquia de títulos inconsistente em algumas páginas de
+                            categoria.</div>
+                        <div class="criteria-row__tag" style="background:var(--yellow-tint); color:var(--yellow);">
+                            Atenção</div>
+                    </div>
+                    <div class="criteria-row" style="border-bottom:none;">
+                        <div class="criteria-row__label">Dados Estruturados</div>
+                        <div class="criteria-row__desc">Ausência de marcação schema.org em páginas de produto e
+                            avaliação.</div>
+                        <div class="criteria-row__tag" style="background:#FCE4DE; color:#A6432B;">Alta prioridade</div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="sheet__foot">
+                <span>NovaVarejo Tecnologia Ltda. — Confidencial</span>
+                <span class="pg" data-page></span>
+            </div>
+        </section>
+
+        <!-- ============================================================
+       SHEET 06 — REGISTRO DE PROBLEMAS
+       ============================================================ -->
+        <section class="sheet">
+            <div class="sheet__head"><strong>WDS-AUD-2026-0001</strong> · Relatório de Auditoria Técnica</div>
+            <div class="sheet__body">
+
+                <h2 class="section-title"><span class="num">09</span> Registro de Problemas</h2>
+
+                <div class="problem">
+                    <div class="problem__head">
+                        <div><span class="problem__id">PB-01</span><span class="problem__title">Ausência de
+                                Content-Security-Policy</span></div>
+                        <span class="crit crit--critica">Crítica</span>
+                    </div>
+                    <div class="problem__body">
+                        <div class="problem__field">
+                            <h4>Descrição Técnica</h4>
+                            <p>A aplicação web não define um cabeçalho Content-Security-Policy, permitindo execução de
+                                scripts de qualquer origem.</p>
+                        </div>
+                        <div class="problem__field">
+                            <h4>Impacto</h4>
+                            <p>Aumenta a superfície de ataque para injeção de scripts (XSS) e carregamento de conteúdo
+                                malicioso de terceiros.</p>
+                        </div>
+                        <div class="problem__field">
+                            <h4>Recomendação</h4>
+                            <p>Implementar CSP restritiva, liberando apenas origens efetivamente utilizadas por scripts,
+                                estilos e imagens.</p>
+                        </div>
+                        <div class="problem__field">
+                            <h4>Benefício Esperado</h4>
+                            <p>Redução significativa de risco de ataques baseados em injeção de conteúdo no navegador.
+                            </p>
+                        </div>
+                        <div class="problem__field full">
+                            <h4>Prioridade</h4>
+                            <p>Curto prazo — recomenda-se tratamento antes do próximo ciclo de release.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="problem">
+                    <div class="problem__head">
+                        <div><span class="problem__id">PB-02</span><span class="problem__title">Política de CORS
+                                excessivamente permissiva</span></div>
+                        <span class="crit crit--alta">Alta</span>
+                    </div>
+                    <div class="problem__body">
+                        <div class="problem__field">
+                            <h4>Descrição Técnica</h4>
+                            <p>A API aceita requisições de origens não relacionadas ao domínio oficial da aplicação.</p>
+                        </div>
+                        <div class="problem__field">
+                            <h4>Impacto</h4>
+                            <p>Facilita o consumo indevido da API por aplicações de terceiros não autorizadas.</p>
+                        </div>
+                        <div class="problem__field">
+                            <h4>Recomendação</h4>
+                            <p>Restringir a lista de origens permitidas às aplicações oficiais do produto.</p>
+                        </div>
+                        <div class="problem__field">
+                            <h4>Benefício Esperado</h4>
+                            <p>Maior controle sobre o consumo da API e redução de uso indevido de dados.</p>
+                        </div>
+                        <div class="problem__field full">
+                            <h4>Prioridade</h4>
+                            <p>Curto prazo.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="problem">
+                    <div class="problem__head">
+                        <div><span class="problem__id">PB-03</span><span class="problem__title">Ausência de cache em
+                                endpoints de catálogo</span></div>
+                        <span class="crit crit--alta">Alta</span>
+                    </div>
+                    <div class="problem__body">
+                        <div class="problem__field">
+                            <h4>Descrição Técnica</h4>
+                            <p>Endpoints de listagem de produtos consultam o banco de dados a cada requisição, sem
+                                camada intermediária de cache.</p>
+                        </div>
+                        <div class="problem__field">
+                            <h4>Impacto</h4>
+                            <p>Aumento de tempo de resposta e de carga no banco de dados sob picos de acesso.</p>
+                        </div>
+                        <div class="problem__field">
+                            <h4>Recomendação</h4>
+                            <p>Introduzir cache de curta duração para consultas de catálogo com baixa frequência de
+                                alteração.</p>
+                        </div>
+                        <div class="problem__field">
+                            <h4>Benefício Esperado</h4>
+                            <p>Redução do tempo médio de resposta e maior resiliência em horários de pico.</p>
+                        </div>
+                        <div class="problem__field full">
+                            <h4>Prioridade</h4>
+                            <p>Médio prazo.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="problem">
+                    <div class="problem__head">
+                        <div><span class="problem__id">PB-04</span><span class="problem__title">Contraste insuficiente e
+                                navegação por teclado incompleta</span></div>
+                        <span class="crit crit--media">Média</span>
+                    </div>
+                    <div class="problem__body">
+                        <div class="problem__field">
+                            <h4>Descrição Técnica</h4>
+                            <p>Elementos secundários de interface não atendem à taxa de contraste mínima recomendada;
+                                parte dos controles não é acessível via teclado.</p>
+                        </div>
+                        <div class="problem__field">
+                            <h4>Impacto</h4>
+                            <p>Reduz a usabilidade para usuários com baixa visão ou que dependem de navegação por
+                                teclado.</p>
+                        </div>
+                        <div class="problem__field">
+                            <h4>Recomendação</h4>
+                            <p>Revisar paleta de contraste e implementar ordem de foco consistente nos componentes
+                                interativos.</p>
+                        </div>
+                        <div class="problem__field">
+                            <h4>Benefício Esperado</h4>
+                            <p>Ampliação do público atendido e conformidade com diretrizes de acessibilidade.</p>
+                        </div>
+                        <div class="problem__field full">
+                            <h4>Prioridade</h4>
+                            <p>Médio prazo.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="problem">
+                    <div class="problem__head">
+                        <div><span class="problem__id">PB-05</span><span class="problem__title">Ausência de dados
+                                estruturados em páginas de produto</span></div>
+                        <span class="crit crit--baixa">Baixa</span>
+                    </div>
+                    <div class="problem__body">
+                        <div class="problem__field">
+                            <h4>Descrição Técnica</h4>
+                            <p>Páginas de produto não possuem marcação schema.org, limitando a exibição de resultados
+                                enriquecidos em buscadores.</p>
+                        </div>
+                        <div class="problem__field">
+                            <h4>Impacto</h4>
+                            <p>Menor taxa de cliques orgânicos em relação a concorrentes com dados estruturados
+                                implementados.</p>
+                        </div>
+                        <div class="problem__field">
+                            <h4>Recomendação</h4>
+                            <p>Implementar marcação de produto, preço e avaliação conforme especificação schema.org.</p>
+                        </div>
+                        <div class="problem__field">
+                            <h4>Benefício Esperado</h4>
+                            <p>Melhoria gradual de visibilidade e taxa de cliques em resultados de busca.</p>
+                        </div>
+                        <div class="problem__field full">
+                            <h4>Prioridade</h4>
+                            <p>Longo prazo.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="sheet__foot">
+                <span>NovaVarejo Tecnologia Ltda. — Confidencial</span>
+                <span class="pg" data-page></span>
+            </div>
+        </section>
+
+        <!-- ============================================================
+       SHEET 07 — ROADMAP + CONCLUSÃO
+       ============================================================ -->
+        <section class="sheet">
+            <div class="sheet__head"><strong>WDS-AUD-2026-0001</strong> · Relatório de Auditoria Técnica</div>
+            <div class="sheet__body">
+
+                <h2 class="section-title"><span class="num">10</span> Roadmap de Melhorias</h2>
+
+                <div class="roadmap">
+                    <div class="roadmap__phase">
+                        <div class="roadmap__phase-label">
+                            <div class="roadmap__phase-name">Curto Prazo</div>
+                            <div class="roadmap__phase-time">0 – 30 dias</div>
+                        </div>
+                        <div class="roadmap__items">
+                            <div class="roadmap__item">
+                                <div class="roadmap__item-top"><span class="roadmap__item-name">Implementar CSP e
+                                        headers de segurança</span><span class="roadmap__item-impact">Impacto
+                                        alto</span></div>
+                                <p class="roadmap__item-desc">Prioridade máxima; reduz diretamente a superfície de
+                                    ataque da aplicação.</p>
+                            </div>
+                            <div class="roadmap__item">
+                                <div class="roadmap__item-top"><span class="roadmap__item-name">Restringir política de
+                                        CORS</span><span class="roadmap__item-impact">Impacto alto</span></div>
+                                <p class="roadmap__item-desc">Ajuste de configuração de baixo esforço e alto retorno em
+                                    segurança.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="roadmap__phase">
+                        <div class="roadmap__phase-label">
+                            <div class="roadmap__phase-name">Médio Prazo</div>
+                            <div class="roadmap__phase-time">30 – 90 dias</div>
+                        </div>
+                        <div class="roadmap__items">
+                            <div class="roadmap__item">
+                                <div class="roadmap__item-top"><span class="roadmap__item-name">Camada de cache para
+                                        catálogo</span><span class="roadmap__item-impact">Impacto médio-alto</span>
+                                </div>
+                                <p class="roadmap__item-desc">Reduz tempo de resposta e carga no banco de dados em
+                                    horários de pico.</p>
+                            </div>
+                            <div class="roadmap__item">
+                                <div class="roadmap__item-top"><span class="roadmap__item-name">Code-splitting e
+                                        otimização de imagens</span><span class="roadmap__item-impact">Impacto
+                                        médio-alto</span></div>
+                                <p class="roadmap__item-desc">Melhora direta nos indicadores de performance e Core Web
+                                    Vitals.</p>
+                            </div>
+                            <div class="roadmap__item">
+                                <div class="roadmap__item-top"><span class="roadmap__item-name">Revisão de contraste e
+                                        navegação por teclado</span><span class="roadmap__item-impact">Impacto
+                                        médio</span></div>
+                                <p class="roadmap__item-desc">Amplia acessibilidade dos fluxos principais de compra.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="roadmap__phase">
+                        <div class="roadmap__phase-label">
+                            <div class="roadmap__phase-name">Longo Prazo</div>
+                            <div class="roadmap__phase-time">90+ dias</div>
+                        </div>
+                        <div class="roadmap__items">
+                            <div class="roadmap__item">
+                                <div class="roadmap__item-top"><span class="roadmap__item-name">Dados estruturados e
+                                        evolução de SEO</span><span class="roadmap__item-impact">Impacto gradual</span>
+                                </div>
+                                <p class="roadmap__item-desc">Melhoria contínua de visibilidade orgânica ao longo dos
+                                    próximos trimestres.</p>
+                            </div>
+                            <div class="roadmap__item">
+                                <div class="roadmap__item-top"><span class="roadmap__item-name">Testes de carga e plano
+                                        de escalabilidade</span><span class="roadmap__item-impact">Impacto
+                                        estrutural</span></div>
+                                <p class="roadmap__item-desc">Prepara a arquitetura para o próximo estágio de
+                                    crescimento de tráfego.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="section-title" style="margin-top:9mm;"><span class="num">11</span> Conclusão</h2>
+
+                <div class="conclusion-box">
+                    <p><strong>Situação atual:</strong> a plataforma opera de forma estável em produção, com arquitetura
+                        de frontend e backend bem organizadas para o estágio atual do produto.</p>
+                    <p><strong>Oportunidades identificadas:</strong> os principais ganhos estão concentrados em
+                        segurança de aplicação web, performance de carregamento e maturidade de SEO técnico.</p>
+                    <p><strong>Próximos passos recomendados:</strong> tratar os itens de curto prazo nos próximos 30
+                        dias, seguidos pela execução do plano de médio prazo, com revisão de progresso ao final de cada
+                        ciclo.</p>
+                </div>
+
+                <div class="signoff">
+                    <div class="signoff__col">
+                        <div class="signoff__line">
+                            <div class="signoff__name">[Nome do Auditor]</div>
+                            <div class="signoff__role">Responsável Técnico — [Nome da Empresa]</div>
+                        </div>
+                    </div>
+                    <div class="signoff__col">
+                        <div class="signoff__line">
+                            <div class="signoff__name">NovaVarejo Tecnologia Ltda.</div>
+                            <div class="signoff__role">Aceite do Cliente</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="sheet__foot">
+                <span>NovaVarejo Tecnologia Ltda. — Confidencial</span>
+                <span class="pg" data-page></span>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        (function () {
+            var pages = document.querySelectorAll('.sheet');
+            var total = pages.length;
+            pages.forEach(function (p, i) {
+                var el = p.querySelector('[data-page]');
+                if (el) { el.textContent = 'Página ' + (i + 1) + ' de ' + total; }
+            });
+        })();
+    </script>
+
+</body>
+
+</html>

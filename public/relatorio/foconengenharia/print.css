@@ -1,0 +1,182 @@
+/* =====================================================================
+   print.css — Estilos de impressão do relatório corporativo
+   Responsável: WDev Studio
+   Uso: renderização A4 profissional via window.print()
+   ===================================================================== */
+
+@page {
+  size: A4 portrait;
+  margin: 16mm 12mm 18mm 12mm;
+
+  /* Número da página via margin box (Chromium moderno) */
+  @bottom-center {
+    content: "Página " counter(page) " de " counter(pages);
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 9px;
+    color: #475569;
+  }
+}
+
+@media print {
+
+  html,
+  body {
+    background: #ffffff !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  /* ---------- Oculta controles e navegação ---------- */
+  .print-toolbar,
+  .btn-print {
+    display: none !important;
+  }
+
+  /* ---------- Remove efeitos de tela ---------- */
+  .page-sheet {
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  .report {
+    box-shadow: none;
+    border-radius: 0;
+    overflow: visible;
+  }
+
+  /* ---------- Cabeçalho repetido em todas as páginas ---------- */
+  .print-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 12px 0 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  }
+
+  .print-header h1 {
+    font-size: 17px;
+    margin-top: 10px;
+  }
+
+  .print-header .subtitle {
+    font-size: 10.5px;
+  }
+
+  .print-header .brand-meta,
+  .print-header .header-meta {
+    font-size: 9.5px;
+  }
+
+  .print-header .header-meta {
+    margin-top: 12px;
+    padding-top: 10px;
+  }
+
+  /* Espaço reservado para o cabeçalho fixo na 1ª página */
+  .report-body {
+    padding-top: 110px;
+  }
+
+  /* ---------- Rodapé fixo (cliente, data, responsável) ---------- */
+  .print-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 4px 0;
+    border-top: 1px solid #cbd5e1;
+    font-size: 9px;
+    color: #475569;
+  }
+
+  .print-footer .footer-meta {
+    text-align: right;
+  }
+
+  /* ---------- Evita quebras internas ---------- */
+  .card,
+  .chart-box,
+  .signature,
+  .sig-block,
+  .report-footer,
+  .card-grid {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* ---------- Tabelas: cabeçalho repetido e linhas íntegras ---------- */
+  .table-wrap {
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+
+  table {
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+
+  table tr {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+
+  tbody tr:nth-child(even) {
+    background: #f1f5f9 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  th,
+  .chip {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ---------- Controla quebras de seção ---------- */
+  h2,
+  h3 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  /* Seções grandes iniciam em nova página quando necessário */
+  .report-body h2:nth-of-type(3),
+  .report-body h2:nth-of-type(4),
+  .report-body h2:nth-of-type(5),
+  .report-body h2:nth-of-type(6) {
+    break-before: page;
+    page-break-before: always;
+    margin-top: 0;
+  }
+
+  /* ---------- Gráficos vetoriais nítidos ---------- */
+  .chart-box svg {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  /* ---------- Cores consistentes na impressão ---------- */
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+}

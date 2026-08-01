@@ -2,7 +2,7 @@ export const CONSTANTS = {
   logo: "/logo.png",
   bkg: "./svg/bk/bkg.svg",
   name: "wdev-studio",
-  role: "Engenheiro de Software Full Stack",
+  role: "",
   email: "wrm.net@gmail.com",
   phone: "(21) 98778-3808",
   location: "Rio de Janeiro, RJ",
